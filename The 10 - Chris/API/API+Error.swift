@@ -11,4 +11,5 @@ import UIKit
 enum APIError: Error {
     case server
     case invalidRequest
+    case badURL
 }

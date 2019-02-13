@@ -7,24 +7,50 @@
 //
 
 import UIKit
-
+// contains page view controller
 class HomeController: UIViewController {
+    var pageController: UIPageViewController!
     
-    @IBOutlet weak var mainView: HomeView!
-
+    var nowPlayingController: MovieCollectionViewController!
+    var upcomingController: MovieCollectionViewController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        APIManager.shared.fetch(ListType.upcoming) { (list: MovieList?, error: Error?) in
-            if let error = error {
-                print(error)
-            }
-        }
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        let home = HomeView(frame: view.frame)
+        view.addSubview(home)
+        view.bringSubviewToFront(home)
+
+        // setup up paging
+        
+        self.pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        self.pageController.willMove(toParent: self)
+        self.addChild(self.pageController)
+        self.pageController.dataSource = self
+        self.pageController.view.frame = CGRect(x: 0, y: 150, width: 0, height: 0)
+        self.pageController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.view.addSubview(self.pageController.view)
+        self.pageController.didMove(toParent: self)
+        
+//        APIManager.shared.fetch(ListType.upcoming) { (list: MovieList?, error: Error?) in
+//            if let error = error {
+//                print(error)
+//            }
+//        }
     }
 }
 
-extension HomeController {
-
+extension HomeController: UIPageViewControllerDataSource {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        if viewController == self.nowPlayingController { return self.upcomingController }
+        return nil
+    }
     
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        if viewController == self.upcomingController { return self.nowPlayingController }
+        return nil
+    }
 
 }

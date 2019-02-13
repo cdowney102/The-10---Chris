@@ -22,7 +22,7 @@ class APIManager {
         var urlComponents = URLComponents(url: base, resolvingAgainstBaseURL: true)
         urlComponents?.queryItems = [URLQueryItem(name: "api_key", value: apiKey)]
         guard let url = urlComponents?.url else {
-            completionHandler(nil, /* some error */ nil)
+            completionHandler(nil, APIError.badURL)
             return
         }
         let request = URLRequest(url: url)
@@ -46,16 +46,7 @@ class APIManager {
                 }
             }
             
-            let optionalResult = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String:AnyObject]
-            
-            guard let result = optionalResult else {
-                completionHandler(nil, APIError.server)
-                return
-            }
-            
-            let response = try? JSONSerialization.data(withJSONObject: result!, options: .prettyPrinted)
-            
-            guard let jsonDataResponse = response else {
+            guard let data = data else {
                 completionHandler(nil, APIError.server)
                 return
             }
@@ -64,7 +55,7 @@ class APIManager {
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             
             do {
-                let object = try decoder.decode(T.self, from: jsonDataResponse)
+                let object = try decoder.decode(T.self, from: data)
                 completionHandler(object, nil)
             } catch {
                 completionHandler(nil, error)
