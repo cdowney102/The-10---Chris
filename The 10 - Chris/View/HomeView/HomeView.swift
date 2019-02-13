@@ -12,7 +12,6 @@ class HomeView: UIView {
     
     let header = Header(frame: .zero)
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.darkGray

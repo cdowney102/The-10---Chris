@@ -11,8 +11,8 @@ import UIKit
 class HomeController: UIViewController {
     var pageController: UIPageViewController!
     
-    var nowPlayingController: MovieCollectionViewController!
-    var upcomingController: MovieCollectionViewController!
+//    var nowPlayingController: MovieCollectionViewController!
+//    var upcomingController: MovieCollectionViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,14 +25,14 @@ class HomeController: UIViewController {
 
         // setup up paging
         
-        self.pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-        self.pageController.willMove(toParent: self)
-        self.addChild(self.pageController)
-        self.pageController.dataSource = self
-        self.pageController.view.frame = CGRect(x: 0, y: 150, width: 0, height: 0)
-        self.pageController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.view.addSubview(self.pageController.view)
-        self.pageController.didMove(toParent: self)
+//        self.pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+//        self.pageController.willMove(toParent: self)
+//        self.addChild(self.pageController)
+//        self.pageController.dataSource = self
+//        self.pageController.view.frame = CGRect(x: 0, y: 150, width: 0, height: 0)
+//        self.pageController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        self.view.addSubview(self.pageController.view)
+//        self.pageController.didMove(toParent: self)
         
 //        APIManager.shared.fetch(ListType.upcoming) { (list: MovieList?, error: Error?) in
 //            if let error = error {
@@ -42,15 +42,15 @@ class HomeController: UIViewController {
     }
 }
 
-extension HomeController: UIPageViewControllerDataSource {
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if viewController == self.nowPlayingController { return self.upcomingController }
-        return nil
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if viewController == self.upcomingController { return self.nowPlayingController }
-        return nil
-    }
-
-}
+//extension HomeController: UIPageViewControllerDataSource {
+////    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+////        if viewController == self.nowPlayingController { return self.upcomingController }
+////        return nil
+////    }
+////
+////    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+////        if viewController == self.upcomingController { return self.nowPlayingController }
+////        return nil
+////    }
+//
+//}

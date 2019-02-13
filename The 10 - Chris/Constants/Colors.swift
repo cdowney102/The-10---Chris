@@ -10,4 +10,7 @@ import UIKit
 
 extension UIColor {
     static let viewBackgroundColor = UIColor.purple
+    static let regularText = UIColor.black
+    static let greyedText = UIColor.gray
+    static let highlightedGreen = UIColor.green
 }
