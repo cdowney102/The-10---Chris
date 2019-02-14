@@ -11,7 +11,7 @@ import UIKit
 class SessionManager {
     
     static let shared = SessionManager()
-    
+    #warning("grab only first 10")
     var nowPlaying = [Movie]()
     var upcoming = [Movie]()
     

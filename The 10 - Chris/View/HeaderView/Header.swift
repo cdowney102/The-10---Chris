@@ -83,7 +83,7 @@ extension Header {
     private func setupSearchLabel() {
         addSubview(searchLabel)
         NSLayoutConstraint.activate([
-            searchLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
+            searchLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 25),
             searchLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 25)
             ])
     }
@@ -97,7 +97,8 @@ extension Header {
             searchField.heightAnchor.constraint(equalToConstant: 35)
             ])
     }
-    
+    #warning("dont need genre list now????????")
+    #warning("handle network connectivity!!! his edge cases -- error handling -- screen sizes -- good error handling and notifications for it")
     private func setupMenuButtons() {
         addSubview(nowPlayingButton)
         NSLayoutConstraint.activate([
