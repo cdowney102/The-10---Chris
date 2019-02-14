@@ -23,12 +23,13 @@ class HomeView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        backgroundColor = UIColor.white
+        backgroundColor = UIColor.clear
         configure()
     }
     
     private func configure() {
         setupHeader()
+        setupMovies()
     }
 }
 
@@ -38,10 +39,20 @@ extension HomeView {
         addSubview(header)
         NSLayoutConstraint.activate([
             header.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-            header.leftAnchor.constraint(equalTo: self.leftAnchor),
-            header.rightAnchor.constraint(equalTo: self.rightAnchor),
+            header.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            header.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             header.heightAnchor.constraint(equalToConstant: 140)
             ])
+    }
+    
+    private func setupMovies() {
+//        addSubview(movieList)
+//           NSLayoutConstraint.activate([
+//            movieList.topAnchor.constraint(equalTo: header.bottomAnchor),
+//            movieList.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 25),
+//            movieList.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -25),
+//            movieList.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+//            ])
     }
 }
 

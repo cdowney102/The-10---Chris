@@ -15,8 +15,8 @@ struct Movie: Decodable {
     var overview: String
     var originalLanguage: String
     var releaseDate: String
-    var backdropPath: String
-    var posterPath: String
+    var backdropPath: String?
+    var posterPath: String?
     
     var genreIds: [Int]
     var id: Int

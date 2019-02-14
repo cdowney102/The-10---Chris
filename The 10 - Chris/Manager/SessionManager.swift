@@ -20,6 +20,12 @@ class SessionManager {
     }
     
     func setUpcomingList(with movies: [Movie]) {
-        self.upcoming = movies
+        SessionManager.shared.upcoming = movies
     }
+    
+    func fetchMovies() {
+        
+    }
+    
 }
+

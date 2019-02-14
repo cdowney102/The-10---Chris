@@ -29,6 +29,7 @@
 		83C233EA2214FA5E00943F85 /* ComingSoonDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C233E92214FA5E00943F85 /* ComingSoonDataSource.swift */; };
 		83C233EC2214FAFD00943F85 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C233EB2214FAFD00943F85 /* SessionManager.swift */; };
 		83C233EE2214FBD100943F85 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C233ED2214FBD100943F85 /* MovieCell.swift */; };
+		83C233F02215FC5D00943F85 /* Extensions+ImgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C233EF2215FC5D00943F85 /* Extensions+ImgView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		83C233E92214FA5E00943F85 /* ComingSoonDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComingSoonDataSource.swift; sourceTree = "<group>"; };
 		83C233EB2214FAFD00943F85 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		83C233ED2214FBD100943F85 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		83C233EF2215FC5D00943F85 /* Extensions+ImgView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+ImgView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 				83B664842213B2F70058917D /* Networking.swift */,
 				83B6647E2213AD860058917D /* Colors.swift */,
 				83C233DB2214D76C00943F85 /* Fonts.swift */,
+				83C233EF2215FC5D00943F85 /* Extensions+ImgView.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				83C233D82214A7BF00943F85 /* Header.swift in Sources */,
 				83B664672213AB050058917D /* HomeController.swift in Sources */,
 				83B664902213C93E0058917D /* MovieList.swift in Sources */,
+				83C233F02215FC5D00943F85 /* Extensions+ImgView.swift in Sources */,
 				83B6648A2213BB440058917D /* API+Error.swift in Sources */,
 				83B664652213AB050058917D /* AppDelegate.swift in Sources */,
 				83B664872213BA7E0058917D /* Movie.swift in Sources */,

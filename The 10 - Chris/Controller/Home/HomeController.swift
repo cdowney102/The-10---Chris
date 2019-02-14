@@ -11,8 +11,8 @@ import UIKit
 class HomeController: UIViewController {
     var pageController: UIPageViewController!
     
-//    var nowPlayingController: MovieCollectionViewController!
-//    var upcomingController: MovieCollectionViewController!
+    var nowPlayingController: MovieCollectionViewController!
+    var upcomingController: MovieCollectionViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,36 +21,53 @@ class HomeController: UIViewController {
         
         let home = HomeView(frame: view.frame)
         view.addSubview(home)
-        view.bringSubviewToFront(home)
-
+        
         // setup up paging
         
-//        self.pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-//        self.pageController.willMove(toParent: self)
-//        self.addChild(self.pageController)
-//        self.pageController.dataSource = self
-//        self.pageController.view.frame = CGRect(x: 0, y: 150, width: 0, height: 0)
-//        self.pageController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//        self.view.addSubview(self.pageController.view)
-//        self.pageController.didMove(toParent: self)
+        self.pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        self.pageController.willMove(toParent: self)
+        self.addChild(self.pageController)
+        self.pageController.dataSource = self
+        self.view.addSubview(self.pageController.view)
         
-//        APIManager.shared.fetch(ListType.upcoming) { (list: MovieList?, error: Error?) in
-//            if let error = error {
-//                print(error)
-//            }
-//        }
+        self.pageController.view.translatesAutoresizingMaskIntoConstraints = false
+        self.pageController.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        self.pageController.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        self.pageController.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        self.pageController.view.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 140).isActive = true
+        
+        self.pageController.didMove(toParent: self)
+        
+        self.upcomingController = MovieCollectionViewController(dataSource:  ComingSoonDataSource())
+        self.nowPlayingController = MovieCollectionViewController(dataSource: ComingSoonDataSource())
+        
+        self.pageController.setViewControllers([self.nowPlayingController], direction: .forward, animated: false, completion: nil)
+        APIManager.shared.fetch(ListType.upcoming) { (list: MovieList?, error: Error?) in
+            if let error = error {
+                print(error)
+            } else {
+                DispatchQueue.main.async {
+                    if let list = list {
+                        SessionManager.shared.setUpcomingList(with: list.results)
+                        print("got data")
+                        self.upcomingController.reloadData()
+                        self.nowPlayingController.reloadData()
+                    }
+                }
+            }
+        }
     }
 }
 
-//extension HomeController: UIPageViewControllerDataSource {
-////    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-////        if viewController == self.nowPlayingController { return self.upcomingController }
-////        return nil
-////    }
-////
-////    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-////        if viewController == self.upcomingController { return self.nowPlayingController }
-////        return nil
-////    }
-//
-//}
+extension HomeController: UIPageViewControllerDataSource {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        if viewController == self.nowPlayingController { return self.upcomingController }
+        return nil
+    }
+
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        if viewController == self.upcomingController { return self.nowPlayingController }
+        return nil
+    }
+
+}

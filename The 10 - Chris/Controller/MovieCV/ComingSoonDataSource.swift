@@ -8,16 +8,19 @@
 
 import UIKit
 
-//class ComingSoonDataSource: NSObject, UICollectionViewDataSource {
-//    
-//    var comingSoonMovies = [Movie]()
-//
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        comingSoonMovies = SessionManager.shared.upcoming
-//        return comingSoonMovies.count
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        <#code#>
-//    }
-//}
+class ComingSoonDataSource: NSObject, UICollectionViewDataSource {
+    
+    var comingSoonMovies = [Movie]()
+    #warning("limit to 10")
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        comingSoonMovies = SessionManager.shared.upcoming
+        return comingSoonMovies.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier, for: indexPath) as! MovieCell
+        let movie = comingSoonMovies[indexPath.row]
+        cell.setCellDataFor(movie)
+        return cell
+    }
+}

@@ -8,12 +8,30 @@
 
 import UIKit
 
-class MovieCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-
+class MovieCollectionViewController: UIViewController, UICollectionViewDelegateFlowLayout {
+    convenience init(dataSource: UICollectionViewDataSource) {
+        self.init()
+        
+        self.dataSource = dataSource
+    }
+    
+    var dataSource: UICollectionViewDataSource!
+    var movieListView: MovieListView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.movieListView = MovieListView(frame: self.view.bounds)
+        self.view.addSubview(self.movieListView)
+        self.movieListView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+       
+        self.movieListView.dataSource = self.dataSource
 
 
+    }
+    
+    func reloadData() {
+        self.movieListView?.movieCollectionView.reloadData()
     }
 }
 

@@ -16,7 +16,7 @@ class APIManager {
     static let baseURL = URL(string: baseUrlPath)!
     
     func fetch<T: Decodable>(_ listType: ListType, completionHandler: @escaping (T?, Error?) -> ()) {
-        
+        // http://image.tmdb.org/t/p/w185/xRWht48C2V8XNfzvPehyClOvDni.jpg -- [poster path]
         // https://api.themoviedb.org/3/genre/movie/list?api_key=d52f2a679c2747d1798778bf535c1989
         let base = APIManager.baseURL.appendingPathComponent(listType.rawValue)
         var urlComponents = URLComponents(url: base, resolvingAgainstBaseURL: true)

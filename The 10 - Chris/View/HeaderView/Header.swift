@@ -97,7 +97,7 @@ extension Header {
             searchField.heightAnchor.constraint(equalToConstant: 35)
             ])
     }
-    #warning("dont need genre list now????????")
+
     #warning("handle network connectivity!!! his edge cases -- error handling -- screen sizes -- good error handling and notifications for it")
     private func setupMenuButtons() {
         addSubview(nowPlayingButton)
