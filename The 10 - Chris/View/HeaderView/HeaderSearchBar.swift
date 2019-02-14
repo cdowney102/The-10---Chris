@@ -23,7 +23,7 @@ class HeaderSearchBar: UITextField {
     let bottomLine: UIView = {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor.greyedText
+        view.backgroundColor = UIColor.searchLabel
         return view
     }()
     
@@ -31,9 +31,9 @@ class HeaderSearchBar: UITextField {
         translatesAutoresizingMaskIntoConstraints = false
         clearButtonMode = .whileEditing
         textAlignment = .left
-        textColor = UIColor.regularText
+        textColor = UIColor.searchLabel
         font = UIFont.regularText
-        attributedPlaceholder = NSAttributedString(string: "MOVIES", attributes: [NSAttributedString.Key.foregroundColor: UIColor.greyedText, NSAttributedString.Key.font: UIFont.searchBarPlaceholder!])
+        attributedPlaceholder = NSAttributedString(string: "MOVIES", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholder, NSAttributedString.Key.font: UIFont.searchBarPlaceholder!])
         addBottomBorder()
     }
     

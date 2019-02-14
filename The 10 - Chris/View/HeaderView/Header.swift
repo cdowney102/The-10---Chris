@@ -30,19 +30,17 @@ class Header: UIView, UICollectionViewDelegate, UICollectionViewDelegateFlowLayo
     var nowPlayingButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("NOW PLAYING", for: .normal)
-        button.titleLabel?.font = UIFont.smallText
-        button.setTitleColor(UIColor.purple, for: .normal)
+        button.setImage(#imageLiteral(resourceName: "nowplaying"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(nowPlayingTapped), for: .touchUpInside)
         return button
     }()
-    #warning("if time permits - underlins can animate in alpha to 1 quickly")
+
     var comingSoonButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("COMING SOON", for: .normal)
-        button.titleLabel?.font = UIFont.smallText
-        button.setTitleColor(UIColor.purple, for: .normal)
+        button.setImage(#imageLiteral(resourceName: "comingsoon"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(comingSoonTapped), for: .touchUpInside)
         return button
     }()
@@ -52,7 +50,7 @@ class Header: UIView, UICollectionViewDelegate, UICollectionViewDelegateFlowLayo
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.font = UIFont.smallText
-        label.textColor = UIColor.greyedText
+        label.textColor = UIColor.searchLabel
         label.text = "SEARCH"
         return label
     }()
@@ -60,20 +58,20 @@ class Header: UIView, UICollectionViewDelegate, UICollectionViewDelegateFlowLayo
     let underlineOne: UIView = {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor.green
+        view.backgroundColor = UIColor.buttonHighlighted
         return view
     }()
     //for coming soon underline
     let underlineTwo: UIView = {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor.green
+        view.backgroundColor = UIColor.buttonHighlighted
         return view
     }()
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = UIColor.lightGray
+        backgroundColor = UIColor.clear
         setupSearchLabel()
         setupSearchBar()
         setupMenuButtons()
@@ -104,28 +102,32 @@ extension Header {
         addSubview(nowPlayingButton)
         NSLayoutConstraint.activate([
             nowPlayingButton.leftAnchor.constraint(equalTo: searchField.leftAnchor, constant: 25),
-            nowPlayingButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -15)
+            nowPlayingButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -15),
+            nowPlayingButton.widthAnchor.constraint(equalToConstant: 100),
+            nowPlayingButton.heightAnchor.constraint(equalToConstant: 30),
             ])
-        
+        #warning("have these alpha animate in quickly for nice effect")
         addSubview(underlineOne)
         NSLayoutConstraint.activate([
+            underlineOne.leftAnchor.constraint(equalTo: nowPlayingButton.leftAnchor, constant: 15),
+            underlineOne.rightAnchor.constraint(equalTo: nowPlayingButton.rightAnchor, constant: -15),
             underlineOne.topAnchor.constraint(equalTo: nowPlayingButton.bottomAnchor, constant: 3),
-            underlineOne.leftAnchor.constraint(equalTo: nowPlayingButton.leftAnchor, constant: 10),
-            underlineOne.rightAnchor.constraint(equalTo: nowPlayingButton.rightAnchor, constant: -10),
             underlineOne.heightAnchor.constraint(equalToConstant: 1)
             ])
         
         addSubview(comingSoonButton)
         NSLayoutConstraint.activate([
             comingSoonButton.rightAnchor.constraint(equalTo: searchField.rightAnchor, constant: -25),
-            comingSoonButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -15)
+            comingSoonButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -15),
+            comingSoonButton.widthAnchor.constraint(equalToConstant: 100),
+            comingSoonButton.heightAnchor.constraint(equalToConstant: 30),
             ])
         
         addSubview(underlineTwo)
         NSLayoutConstraint.activate([
+            underlineTwo.leftAnchor.constraint(equalTo: comingSoonButton.leftAnchor, constant: 15),
+            underlineTwo.rightAnchor.constraint(equalTo: comingSoonButton.rightAnchor, constant: -15),
             underlineTwo.topAnchor.constraint(equalTo: comingSoonButton.bottomAnchor, constant: 3),
-            underlineTwo.leftAnchor.constraint(equalTo: comingSoonButton.leftAnchor, constant: 10),
-            underlineTwo.rightAnchor.constraint(equalTo: comingSoonButton.rightAnchor, constant: -10),
             underlineTwo.heightAnchor.constraint(equalToConstant: 1)
             ])
     }

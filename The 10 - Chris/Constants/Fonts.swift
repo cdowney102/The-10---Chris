@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIFont {
-    static let regularText = UIFont(name: "HelveticaNeue", size: 16)
-    static let smallText = UIFont(name: "HelveticaNeue", size: 14)
-    static let searchBarPlaceholder = UIFont(name: "HelveticaNeue", size: 24)
+    static let regularText = UIFont(name: "Avenir-Medium", size: 16)
+    static let smallText = UIFont(name: "Avenir-Light", size: 14)
+    static let searchBarPlaceholder = UIFont(name: "Avenir-Heavy", size: 24)
 }

@@ -14,7 +14,8 @@ class HomeView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.darkGray
+        
+        backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Home Background"))
         configure()
     }
     
