@@ -30,7 +30,7 @@ class Header: UIView, UICollectionViewDelegate, UICollectionViewDelegateFlowLayo
     var nowPlayingButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(#imageLiteral(resourceName: "nowplaying"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "nowplaying highlight"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(nowPlayingTapped), for: .touchUpInside)
         return button
