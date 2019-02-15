@@ -9,26 +9,43 @@
 import UIKit
 
 // MARK - download movie image or assign default image if none
-extension UIImageView {
+extension ScaleImageView {
+    static var cache: [URL: UIImage] = [:]
+    
     func downloadImage(imageType: ImageType, path: String) {
-        let image = #imageLiteral(resourceName: "no poster")
+        let defaultImage = #imageLiteral(resourceName: "no poster")
         guard let url = URL(string: imageType.rawValue + path) else {
             print("failed url")
-            self.image = image
+            self.image = defaultImage
             return
             
         }
-        DispatchQueue.global().async { [ weak self ] in
-            if let data = try? Data(contentsOf: url) {
-                if let img = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self?.image = img
-                        return
+        
+        self.url = url
+        
+        if let image = ScaleImageView.cache[url] {
+            self.image = image
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            if let imageData = data, let img = UIImage(data: imageData) {
+                
+                DispatchQueue.main.async {
+                    if img.size.width > 500 {
+                        print("Big image!")
                     }
+                    ScaleImageView.cache[url] = img
+                    
+                    if self?.url == url {
+                        self?.image = img
+                    }
+                    return
                 }
             }
         }
-        self.image = image
+        
+        task.resume()
     }
 }
 
@@ -36,9 +53,9 @@ extension UIImageView {
 extension UIImageView {
     func setStarRating(with rating: Double) {
         var star = #imageLiteral(resourceName: "Home Yellow Star-1")
-        if rating < 3.5 {
+        if rating < 4 {
             star = #imageLiteral(resourceName: "Home Red Star-1")
-        } else if rating > 6.5 {
+        } else if rating > 7 {
             star = #imageLiteral(resourceName: "Home Green Star-1")
         }
         self.image = star

@@ -41,10 +41,25 @@ class HomeController: UIViewController {
         
         self.pageController.didMove(toParent: self)
         
-        self.upcomingController = MovieCollectionViewController(dataSource:  ComingSoonDataSource())
-        self.nowPlayingController = MovieCollectionViewController(dataSource: NowPlayingDataSource())
+        self.upcomingController = MovieCollectionViewController(dataSource:  MoviesDataSource())
+        self.nowPlayingController = MovieCollectionViewController(dataSource: MoviesDataSource())
         
         self.pageController.setViewControllers([self.nowPlayingController], direction: .forward, animated: false, completion: nil)
+        
+        APIManager.shared.fetch(ListType.upcoming) { (list: MovieList?, error: Error?) in
+            if let error = error {
+                print(error)
+            } else {
+                DispatchQueue.main.async {
+                    if let list = list {
+                        DataManager.shared.setNowPlayingList(with: list.results)
+                        print("got data")
+                        self.nowPlayingController.dataSource.movies = list.results
+                    }
+                }
+            }
+        }
+        #warning("gracefully handle delay while images load")
         APIManager.shared.fetch(ListType.upcoming) { (list: MovieList?, error: Error?) in
             if let error = error {
                 print(error)
@@ -52,14 +67,20 @@ class HomeController: UIViewController {
                 DispatchQueue.main.async {
                     if let list = list {
                         DataManager.shared.setComingSoonList(with: list.results)
+                        self.upcomingController.dataSource.movies = list.results
                         print("got data")
-                        self.upcomingController.reloadData()
-                        self.nowPlayingController.reloadData()
                     }
                 }
             }
         }
+        
     }
+
+    func search(for searchString: String?) {
+        self.nowPlayingController.search(for: searchString)
+        self.upcomingController.search(for: searchString)
+    }
+    
 }
 
 extension HomeController: UIPageViewControllerDataSource {

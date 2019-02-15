@@ -17,8 +17,9 @@ class MovieListView: UIView {
         configure()
     }
     
-    var dataSource: UICollectionViewDataSource? { didSet {
+    var dataSource: MoviesDataSource? { didSet {
         self.movieCollectionView.dataSource = self.dataSource
+        self.dataSource?.collectionView = self.movieCollectionView
         self.movieCollectionView?.reloadData()
     }}
     

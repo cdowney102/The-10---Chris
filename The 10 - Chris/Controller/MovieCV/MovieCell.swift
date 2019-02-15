@@ -11,6 +11,8 @@ import UIKit
 
 class MovieCell: UICollectionViewCell {
     static let identifier = "MovieCell"
+    
+    var movie: Movie?
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -21,10 +23,11 @@ class MovieCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var movieImage: UIImageView = {
-        let imageView = UIImageView(frame: .zero)
+    var movieImage: ScaleImageView = {
+        let imageView = ScaleImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = #imageLiteral(resourceName: "aqua")
+        imageView.backgroundColor = .clear
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         return imageView
@@ -41,10 +44,10 @@ class MovieCell: UICollectionViewCell {
     var movieTitle: UILabel = {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.font = UIFont.cellTitle
         label.textColor = UIColor.movieTitle
-        label.text = "Aquaman"
+        label.text = "Title"
         label.lineBreakMode = .byTruncatingTail
         label.numberOfLines = 1
         return label
@@ -56,7 +59,7 @@ class MovieCell: UICollectionViewCell {
         label.textAlignment = .left
         label.font = UIFont.cellTitle
         label.textColor = UIColor.movieTitle
-        label.text = "Aquaman"
+        label.text = "rating"
         return label
     }()
     
@@ -71,9 +74,13 @@ class MovieCell: UICollectionViewCell {
 // MARK - configure cell data
 extension MovieCell {
     func setCellDataFor(_ movie: Movie) {
+        if movie == self.movie { return }
+        
+        self.movie = movie
+        print("Setting movie to \(movie.title)")
         let posterPath = movie.posterPath ?? ""
         movieImage.downloadImage(imageType: .poster, path: posterPath)
-        movieImage.image = #imageLiteral(resourceName: "no poster")
+        //movieImage.image = #imageLiteral(resourceName: "no poster")
         movieTitle.text = movie.title
         ratingLabel.text = "\(String(describing: movie.voteAverage))/10"
         starImage.setStarRating(with: movie.voteAverage)
@@ -87,7 +94,7 @@ extension MovieCell {
         movieImage.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .vertical)
         NSLayoutConstraint.activate([
             movieImage.topAnchor.constraint(equalTo: self.topAnchor),
-            movieImage.leftAnchor.constraint(equalTo: self.leftAnchor),
+            movieImage.leftAnchor.constraint(equalTo: movieTitle.leftAnchor),
             movieImage.rightAnchor.constraint(equalTo: self.rightAnchor),
             movieImage.bottomAnchor.constraint(equalTo: movieTitle.topAnchor, constant: -5)
             ])
@@ -96,10 +103,9 @@ extension MovieCell {
     private func setupTitle() {
         addSubview(movieTitle)
         NSLayoutConstraint.activate([
-            movieTitle.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5),
+            movieTitle.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 15),
             movieTitle.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),
             movieTitle.bottomAnchor.constraint(equalTo: starImage.topAnchor),
-            movieTitle.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             movieTitle.heightAnchor.constraint(equalToConstant: 20)
             ])
     }
@@ -108,7 +114,7 @@ extension MovieCell {
         addSubview(starImage)
         NSLayoutConstraint.activate([
             starImage.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5),
-            starImage.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: -20),
+            starImage.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 15),
             starImage.heightAnchor.constraint(equalToConstant: 10),
             starImage.widthAnchor.constraint(equalToConstant: 10),
             ])

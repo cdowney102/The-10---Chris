@@ -33,8 +33,18 @@ class HeaderSearchBar: UITextField {
         textAlignment = .left
         textColor = UIColor.searchLabel
         font = UIFont.regularText
+        self.addTarget(self, action: #selector(textChanged), for: .editingChanged)
         attributedPlaceholder = NSAttributedString(string: "MOVIES", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholder, NSAttributedString.Key.font: UIFont.searchBarPlaceholder!])
         addBottomBorder()
+    }
+    
+    weak var updateTimer: Timer?
+    @objc func textChanged() {
+        self.updateTimer?.invalidate()
+        
+        self.updateTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
+            (self.viewController as? HomeController)?.search(for: self.text)
+        })
     }
     
 }

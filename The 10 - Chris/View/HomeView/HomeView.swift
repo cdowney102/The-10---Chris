@@ -8,7 +8,7 @@
 // the home screen main view
 
 import UIKit
-
+#warning("can condense this to be only a header on homecontroller")
 class HomeView: UIView {
     
     let header = Header(frame: .zero)

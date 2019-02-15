@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Movie: Decodable {
+struct Movie: Decodable, Equatable {
     
     var title: String
     var originalTitle: String
@@ -27,6 +27,14 @@ struct Movie: Decodable {
     
     var adult: Bool
     var video: Bool
+    
+    static func ==(lhs: Movie, rhs: Movie) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func matches(_ text: String) -> Bool {
+        return self.title.lowercased().contains(text.lowercased())
+    }
     
     // MARK - This will hold all the genre names for the movie
     var genres: String {

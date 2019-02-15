@@ -5,6 +5,7 @@
 //  Created by christopher downey on 2/12/19.
 //  Copyright © 2019 christopher downey. All rights reserved.
 //
+// App requirements: Assume US [ using left/ right rather than leading/ trailing anchors ]
 
 import UIKit
 
@@ -12,7 +13,6 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let root = HomeController()
         let navController = UINavigationController(rootViewController: root)
         
-        window?.rootViewController = UINavigationController(rootViewController: root)
+        window?.rootViewController = navController
         
         return true
     }

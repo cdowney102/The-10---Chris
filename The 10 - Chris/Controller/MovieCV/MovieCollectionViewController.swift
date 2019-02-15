@@ -10,14 +10,18 @@ import UIKit
 
 class MovieCollectionViewController: UIViewController {
     
-    convenience init(dataSource: UICollectionViewDataSource) {
+    convenience init(dataSource: MoviesDataSource) {
         self.init()
         
         self.dataSource = dataSource
     }
     
-    var dataSource: UICollectionViewDataSource!
+    var dataSource: MoviesDataSource!
     var movieListView: MovieListView!
+    
+    func search(for searchString: String?) {
+        self.dataSource?.search(for: searchString)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +30,7 @@ class MovieCollectionViewController: UIViewController {
         self.view.addSubview(self.movieListView)
         self.movieListView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.movieListView.dataSource = self.dataSource
+        self.dataSource.collectionView = self.movieListView?.movieCollectionView
     }
     
     func reloadData() {
