@@ -11,8 +11,9 @@ import UIKit
 
 class MovieCell: UICollectionViewCell {
     static let identifier = "MovieCell"
-    
+    // caching - prevent cell from dl image twice
     var movie: Movie?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -74,13 +75,11 @@ class MovieCell: UICollectionViewCell {
 // MARK - configure cell data
 extension MovieCell {
     func setCellDataFor(_ movie: Movie) {
+        //check if already configued - remove this later - fixing bug for now
         if movie == self.movie { return }
-        
         self.movie = movie
-        print("Setting movie to \(movie.title)")
         let posterPath = movie.posterPath ?? ""
         movieImage.downloadImage(imageType: .poster, path: posterPath)
-        //movieImage.image = #imageLiteral(resourceName: "no poster")
         movieTitle.text = movie.title
         ratingLabel.text = "\(String(describing: movie.voteAverage))/10"
         starImage.setStarRating(with: movie.voteAverage)

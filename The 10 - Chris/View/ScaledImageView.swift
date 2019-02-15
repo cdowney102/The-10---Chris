@@ -11,12 +11,15 @@
 import UIKit
 
 class ScaleImageView: UIView {
-    var image: UIImage? { didSet {
-        self.setNeedsDisplay()
-        print("draw")
-    
-        }}
+    // for image caching
     var url: URL?
+
+    var image: UIImage? {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
+    
     override func draw(_ rect: CGRect) {
         guard let image = self.image else { return }
         // grab ratios and rect size

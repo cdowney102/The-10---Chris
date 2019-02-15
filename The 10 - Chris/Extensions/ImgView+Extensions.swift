@@ -10,6 +10,7 @@ import UIKit
 
 // MARK - download movie image or assign default image if none
 extension ScaleImageView {
+    
     static var cache: [URL: UIImage] = [:]
     
     func downloadImage(imageType: ImageType, path: String) {
@@ -18,23 +19,23 @@ extension ScaleImageView {
             print("failed url")
             self.image = defaultImage
             return
-            
         }
-        
+        // save url to check against cache
         self.url = url
-        
+        // check if imaged was cached already
         if let image = ScaleImageView.cache[url] {
             self.image = image
             return
         }
         
-        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+        let task = URLSession.shared.dataTask(with: url) { [ weak self ] data, response, error in
+            
             if let imageData = data, let img = UIImage(data: imageData) {
-                
                 DispatchQueue.main.async {
                     if img.size.width > 500 {
                         print("Big image!")
                     }
+                    // set cache
                     ScaleImageView.cache[url] = img
                     
                     if self?.url == url {
@@ -44,7 +45,6 @@ extension ScaleImageView {
                 }
             }
         }
-        
         task.resume()
     }
 }
