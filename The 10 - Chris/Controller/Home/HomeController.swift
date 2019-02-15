@@ -31,10 +31,13 @@ class HomeController: UIViewController {
         self.view.addSubview(self.pageController.view)
         
         self.pageController.view.translatesAutoresizingMaskIntoConstraints = false
-        self.pageController.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        self.pageController.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        self.pageController.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        self.pageController.view.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 140).isActive = true
+        NSLayoutConstraint.activate([
+            pageController.view.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            pageController.view.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+            pageController.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            pageController.view.topAnchor.constraint(equalTo: home.header.bottomAnchor)
+            ])
+        
         
         self.pageController.didMove(toParent: self)
         
@@ -48,7 +51,7 @@ class HomeController: UIViewController {
             } else {
                 DispatchQueue.main.async {
                     if let list = list {
-                        SessionManager.shared.setUpcomingList(with: list.results)
+                        DataManager.shared.setComingSoonList(with: list.results)
                         print("got data")
                         self.upcomingController.reloadData()
                         self.nowPlayingController.reloadData()

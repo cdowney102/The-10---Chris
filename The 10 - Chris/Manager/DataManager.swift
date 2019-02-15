@@ -8,19 +8,19 @@
 
 import UIKit
 
-class SessionManager {
+class DataManager {
     
-    static let shared = SessionManager()
+    static let shared = DataManager()
     #warning("grab only first 10")
     var nowPlaying = [Movie]()
-    var upcoming = [Movie]()
+    var comingSoon = [Movie]()
     
     func setNowPlayingList(with movies: [Movie]) {
         self.nowPlaying = movies
     }
     
-    func setUpcomingList(with movies: [Movie]) {
-        SessionManager.shared.upcoming = movies
+    func setComingSoonList(with movies: [Movie]) {
+        DataManager.shared.comingSoon = movies
     }
     
     func fetchMovies() {

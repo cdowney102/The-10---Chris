@@ -10,11 +10,13 @@ import UIKit
 
 // MARK - download movie image or assign default image if none
 extension UIImageView {
-    func downloadImageAt(path: String) {
+    func downloadImage(imageType: ImageType, path: String) {
         let image = #imageLiteral(resourceName: "no poster")
-        guard let url = URL(string: path) else {
+        guard let url = URL(string: imageType.rawValue + path) else {
+            print("failed url")
             self.image = image
             return
+            
         }
         DispatchQueue.global().async { [ weak self ] in
             if let data = try? Data(contentsOf: url) {

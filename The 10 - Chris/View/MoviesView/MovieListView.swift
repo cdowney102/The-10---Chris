@@ -52,9 +52,9 @@ extension MovieListView {
         addSubview(movieCollectionView)
         
         NSLayoutConstraint.activate([
-            movieCollectionView.topAnchor.constraint(equalTo: self.topAnchor),
-            movieCollectionView.leftAnchor.constraint(equalTo: self.leftAnchor),
-            movieCollectionView.rightAnchor.constraint(equalTo: self.rightAnchor),
+            movieCollectionView.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
+            movieCollectionView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
+            movieCollectionView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
             movieCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             ])
     }
@@ -63,11 +63,15 @@ extension MovieListView {
 
 extension MovieListView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width / 2 - 10, height: collectionView.frame.height / 2.2)
+        return CGSize(width: collectionView.frame.width / 2 - 10, height: collectionView.frame.height / 2.3)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 15
     }
 }
 

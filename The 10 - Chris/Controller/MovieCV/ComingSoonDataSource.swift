@@ -13,7 +13,7 @@ class ComingSoonDataSource: NSObject, UICollectionViewDataSource {
     var comingSoonMovies = [Movie]()
     #warning("limit to 10")
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        comingSoonMovies = SessionManager.shared.upcoming
+        comingSoonMovies = DataManager.shared.comingSoon
         return comingSoonMovies.count
     }
     

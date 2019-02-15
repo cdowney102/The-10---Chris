@@ -13,7 +13,7 @@ class NowPlayingDataSource: NSObject, UICollectionViewDataSource {
     var nowPlayingMovies = [Movie]()
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        nowPlayingMovies = SessionManager.shared.nowPlaying
+        nowPlayingMovies = DataManager.shared.nowPlaying
         return nowPlayingMovies.count
     }
     

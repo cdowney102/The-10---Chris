@@ -7,11 +7,26 @@
 //
 
 import UIKit
-#warning("maybe put placeholder json and stuff while shit is laoding")
+
+enum ImageType: String {
+    case poster
+    case backdrop
+    
+    var rawValue: String {
+        switch self {
+        case .poster:
+            return "http://image.tmdb.org/t/p/w185"
+        default:
+            return "http://image.tmdb.org/t/p/w780"
+        }
+    }
+}
+
 enum ListType: String {
     case nowPlaying
     case upcoming
     case genres
+    case poster
     
     var rawValue: String {
         switch self {
@@ -19,6 +34,8 @@ enum ListType: String {
             return "now_playing"
         case .genres:
             return "genre/movie/list"
+        case .poster:
+            return "http://image.tmdb.org/t/p/w185/"
         default:
             return "movie/upcoming"
         }

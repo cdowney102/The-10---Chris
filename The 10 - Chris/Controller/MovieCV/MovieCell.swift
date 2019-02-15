@@ -25,6 +25,15 @@ class MovieCell: UICollectionViewCell {
         let imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = #imageLiteral(resourceName: "aqua")
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        return imageView
+    }()
+    
+    var fillerImage: UIImageView = {
+        let imageView = UIImageView(frame: .zero)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = #imageLiteral(resourceName: "no poster")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
@@ -45,8 +54,8 @@ class MovieCell: UICollectionViewCell {
         label.font = UIFont.cellTitle
         label.textColor = UIColor.movieTitle
         label.text = "Aquaman"
-        label.lineBreakMode = .byCharWrapping
-        label.numberOfLines = 2
+        label.lineBreakMode = .byTruncatingTail
+        label.numberOfLines = 1
         return label
     }()
     
@@ -54,7 +63,7 @@ class MovieCell: UICollectionViewCell {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.font = UIFont.smallText
+        label.font = UIFont.cellTitle
         label.textColor = UIColor.movieTitle
         label.text = "Aquaman"
         return label
@@ -72,10 +81,9 @@ class MovieCell: UICollectionViewCell {
 extension MovieCell {
     func setCellDataFor(_ movie: Movie) {
         let posterPath = movie.posterPath ?? ""
-//        movieImage.downloadImageAt(path: posterPath)
+        movieImage.downloadImage(imageType: .poster, path: posterPath)
         movieImage.image = #imageLiteral(resourceName: "no poster")
         movieTitle.text = movie.title
-        // handle star coloring here
         ratingLabel.text = "\(String(describing: movie.voteAverage))/10"
         starImage.setStarRating(with: movie.voteAverage)
     }
@@ -84,13 +92,22 @@ extension MovieCell {
 // MARK - autolayout code
 extension MovieCell {
     private func setupImage() {
-        addSubview(movieImage)
-        movieImage.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .vertical)
+        addSubview(fillerImage)
+        fillerImage.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .vertical)
         NSLayoutConstraint.activate([
-            movieImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
-            movieImage.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5),
-            movieImage.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),
-            movieImage.bottomAnchor.constraint(equalTo: movieTitle.topAnchor, constant: -7)
+            fillerImage.topAnchor.constraint(equalTo: self.topAnchor),
+            fillerImage.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5),
+            fillerImage.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),
+            fillerImage.bottomAnchor.constraint(equalTo: movieTitle.topAnchor, constant: -5)
+            ])
+        
+        fillerImage.addSubview(movieImage)
+//        movieImage.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .vertical)
+        NSLayoutConstraint.activate([
+            movieImage.topAnchor.constraint(equalTo: fillerImage.topAnchor),
+            movieImage.leftAnchor.constraint(equalTo: fillerImage.leftAnchor),
+            movieImage.rightAnchor.constraint(equalTo: fillerImage.rightAnchor),
+            movieImage.bottomAnchor.constraint(equalTo: fillerImage.bottomAnchor)
             ])
     }
     
@@ -98,25 +115,25 @@ extension MovieCell {
         addSubview(movieTitle)
         NSLayoutConstraint.activate([
             movieTitle.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5),
-            movieTitle.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),
-            movieTitle.bottomAnchor.constraint(equalTo: starImage.topAnchor, constant: -1),
-            movieTitle.heightAnchor.constraint(equalToConstant: 40)
+            movieTitle.rightAnchor.constraint(equalTo: self.rightAnchor),
+            movieTitle.bottomAnchor.constraint(equalTo: starImage.topAnchor),
+            movieTitle.heightAnchor.constraint(equalToConstant: 20)
             ])
     }
     
     private func setupRating() {
         addSubview(starImage)
         NSLayoutConstraint.activate([
-            starImage.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
-            starImage.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5),
+            starImage.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5),
+            starImage.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5 ),
             starImage.heightAnchor.constraint(equalToConstant: 10),
             starImage.widthAnchor.constraint(equalToConstant: 10),
             ])
         
-//        addSubview(ratingLabel)
-//        NSLayoutConstraint.activate([
-//            ratingLabel.centerYAnchor.constraint(equalTo: starImage.centerYAnchor),
-//            ratingLabel.leftAnchor.constraint(equalTo: starImage.rightAnchor, constant: 3),
-//            ])
+        addSubview(ratingLabel)
+        NSLayoutConstraint.activate([
+            ratingLabel.centerYAnchor.constraint(equalTo: starImage.centerYAnchor, constant: 1),
+            ratingLabel.leftAnchor.constraint(equalTo: starImage.rightAnchor, constant: 5),
+            ])
     }
 }
