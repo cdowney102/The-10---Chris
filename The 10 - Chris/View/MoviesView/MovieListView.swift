@@ -46,7 +46,6 @@ extension MovieListView {
         movieCollectionView.backgroundColor = UIColor.clear
         movieCollectionView.showsVerticalScrollIndicator = false
         
-        movieCollectionView.backgroundColor = .orange
         movieCollectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.identifier)
         movieCollectionView.delegate = self
         movieCollectionView.dataSource = self.dataSource

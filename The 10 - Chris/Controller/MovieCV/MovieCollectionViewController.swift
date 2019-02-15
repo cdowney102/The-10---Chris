@@ -8,7 +8,8 @@
 
 import UIKit
 
-class MovieCollectionViewController: UIViewController, UICollectionViewDelegateFlowLayout {
+class MovieCollectionViewController: UIViewController {
+    
     convenience init(dataSource: UICollectionViewDataSource) {
         self.init()
         
@@ -24,10 +25,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegateF
         self.movieListView = MovieListView(frame: self.view.bounds)
         self.view.addSubview(self.movieListView)
         self.movieListView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-       
         self.movieListView.dataSource = self.dataSource
-
-
     }
     
     func reloadData() {
@@ -36,8 +34,12 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegateF
 }
 
 // MARK - styling
-extension MovieCollectionViewController {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width / 2 - 1, height: collectionView.frame.height / 2)
-    }
-}
+//extension MovieCollectionViewController: UICollectionViewDelegateFlowLayout {
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: collectionView.frame.width / 2 - 10, height: collectionView.frame.height / 2)
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+//        return 10
+//    }
+//}

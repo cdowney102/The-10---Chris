@@ -39,7 +39,7 @@ class HomeController: UIViewController {
         self.pageController.didMove(toParent: self)
         
         self.upcomingController = MovieCollectionViewController(dataSource:  ComingSoonDataSource())
-        self.nowPlayingController = MovieCollectionViewController(dataSource: ComingSoonDataSource())
+        self.nowPlayingController = MovieCollectionViewController(dataSource: NowPlayingDataSource())
         
         self.pageController.setViewControllers([self.nowPlayingController], direction: .forward, animated: false, completion: nil)
         APIManager.shared.fetch(ListType.upcoming) { (list: MovieList?, error: Error?) in

@@ -42,7 +42,7 @@ class MovieCell: UICollectionViewCell {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.font = UIFont.smallText
+        label.font = UIFont.cellTitle
         label.textColor = UIColor.movieTitle
         label.text = "Aquaman"
         label.lineBreakMode = .byCharWrapping
@@ -99,7 +99,7 @@ extension MovieCell {
         NSLayoutConstraint.activate([
             movieTitle.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5),
             movieTitle.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),
-            movieTitle.bottomAnchor.constraint(equalTo: starImage.topAnchor, constant: -7),
+            movieTitle.bottomAnchor.constraint(equalTo: starImage.topAnchor, constant: -1),
             movieTitle.heightAnchor.constraint(equalToConstant: 40)
             ])
     }
