@@ -103,7 +103,7 @@ extension Header {
         addSubview(nowPlayingButton)
         NSLayoutConstraint.activate([
             nowPlayingButton.leftAnchor.constraint(equalTo: searchField.leftAnchor, constant: 25),
-            nowPlayingButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
+            nowPlayingButton.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             nowPlayingButton.widthAnchor.constraint(equalToConstant: 100),
             nowPlayingButton.heightAnchor.constraint(equalToConstant: 30),
             ])
@@ -119,7 +119,7 @@ extension Header {
         addSubview(comingSoonButton)
         NSLayoutConstraint.activate([
             comingSoonButton.rightAnchor.constraint(equalTo: searchField.rightAnchor, constant: -25),
-            comingSoonButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
+            comingSoonButton.centerYAnchor.constraint(equalTo: nowPlayingButton.centerYAnchor),
             comingSoonButton.widthAnchor.constraint(equalToConstant: 100),
             comingSoonButton.heightAnchor.constraint(equalToConstant: 30),
             ])

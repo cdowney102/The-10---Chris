@@ -52,7 +52,7 @@ extension MovieListView {
         addSubview(movieCollectionView)
         
         NSLayoutConstraint.activate([
-            movieCollectionView.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
+            movieCollectionView.topAnchor.constraint(equalTo: self.topAnchor, constant: 55),
             movieCollectionView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
             movieCollectionView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
             movieCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),

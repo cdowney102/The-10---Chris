@@ -41,7 +41,7 @@ extension HomeView {
             header.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             header.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             header.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            header.heightAnchor.constraint(equalToConstant: 140)
+            header.heightAnchor.constraint(equalToConstant: 150)
             ])
     }
     

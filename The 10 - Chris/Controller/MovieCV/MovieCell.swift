@@ -29,16 +29,7 @@ class MovieCell: UICollectionViewCell {
         imageView.clipsToBounds = true
         return imageView
     }()
-    
-    var fillerImage: UIImageView = {
-        let imageView = UIImageView(frame: .zero)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = #imageLiteral(resourceName: "no poster")
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        return imageView
-    }()
-    
+
     var starImage: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +41,7 @@ class MovieCell: UICollectionViewCell {
     var movieTitle: UILabel = {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .left
+        label.textAlignment = .center
         label.font = UIFont.cellTitle
         label.textColor = UIColor.movieTitle
         label.text = "Aquaman"
@@ -92,22 +83,13 @@ extension MovieCell {
 // MARK - autolayout code
 extension MovieCell {
     private func setupImage() {
-        addSubview(fillerImage)
-        fillerImage.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .vertical)
+        addSubview(movieImage)
+        movieImage.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .vertical)
         NSLayoutConstraint.activate([
-            fillerImage.topAnchor.constraint(equalTo: self.topAnchor),
-            fillerImage.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5),
-            fillerImage.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),
-            fillerImage.bottomAnchor.constraint(equalTo: movieTitle.topAnchor, constant: -5)
-            ])
-        
-        fillerImage.addSubview(movieImage)
-//        movieImage.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .vertical)
-        NSLayoutConstraint.activate([
-            movieImage.topAnchor.constraint(equalTo: fillerImage.topAnchor),
-            movieImage.leftAnchor.constraint(equalTo: fillerImage.leftAnchor),
-            movieImage.rightAnchor.constraint(equalTo: fillerImage.rightAnchor),
-            movieImage.bottomAnchor.constraint(equalTo: fillerImage.bottomAnchor)
+            movieImage.topAnchor.constraint(equalTo: self.topAnchor),
+            movieImage.leftAnchor.constraint(equalTo: self.leftAnchor),
+            movieImage.rightAnchor.constraint(equalTo: self.rightAnchor),
+            movieImage.bottomAnchor.constraint(equalTo: movieTitle.topAnchor, constant: -5)
             ])
     }
     
@@ -115,8 +97,9 @@ extension MovieCell {
         addSubview(movieTitle)
         NSLayoutConstraint.activate([
             movieTitle.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5),
-            movieTitle.rightAnchor.constraint(equalTo: self.rightAnchor),
+            movieTitle.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),
             movieTitle.bottomAnchor.constraint(equalTo: starImage.topAnchor),
+            movieTitle.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             movieTitle.heightAnchor.constraint(equalToConstant: 20)
             ])
     }
@@ -125,7 +108,7 @@ extension MovieCell {
         addSubview(starImage)
         NSLayoutConstraint.activate([
             starImage.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5),
-            starImage.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5 ),
+            starImage.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: -20),
             starImage.heightAnchor.constraint(equalToConstant: 10),
             starImage.widthAnchor.constraint(equalToConstant: 10),
             ])
@@ -134,6 +117,7 @@ extension MovieCell {
         NSLayoutConstraint.activate([
             ratingLabel.centerYAnchor.constraint(equalTo: starImage.centerYAnchor, constant: 1),
             ratingLabel.leftAnchor.constraint(equalTo: starImage.rightAnchor, constant: 5),
+            ratingLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),
             ])
     }
 }

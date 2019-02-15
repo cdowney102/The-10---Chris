@@ -65,3 +65,5 @@ class APIManager {
         task.resume()
     }
 }
+
+#warning("post not to each vc that relevant data loaded -- fetch actor iamges for each movie")
