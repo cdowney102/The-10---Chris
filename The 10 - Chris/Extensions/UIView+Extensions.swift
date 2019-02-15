@@ -12,7 +12,7 @@ import UIKit
 extension UIView {
     public var viewController: UIViewController? {
         var responder = self.next
-        
+        // loop through hierarchy to find VC
         while responder != nil {
             if let controller = responder as? UIViewController { return controller }
             responder = responder!.next

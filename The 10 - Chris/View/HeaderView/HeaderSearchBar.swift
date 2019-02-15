@@ -10,6 +10,9 @@ import UIKit
 
 class HeaderSearchBar: UITextField {
     
+    // custom searchbar without search controller
+    weak var updateTimer: Timer?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -33,20 +36,21 @@ class HeaderSearchBar: UITextField {
         textAlignment = .left
         textColor = UIColor.searchLabel
         font = UIFont.regularText
-        self.addTarget(self, action: #selector(textChanged), for: .editingChanged)
         attributedPlaceholder = NSAttributedString(string: "MOVIES", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholder, NSAttributedString.Key.font: UIFont.searchBarPlaceholder!])
+        
         addBottomBorder()
+        
+        self.addTarget(self, action: #selector(textChanged), for: .editingChanged)
     }
     
-    weak var updateTimer: Timer?
+    // MARK - this tracks if user is searching for movie - start / invalidate quick timer
     @objc func textChanged() {
         self.updateTimer?.invalidate()
-        
         self.updateTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
+            // call homecontrollers search
             (self.viewController as? HomeController)?.search(for: self.text)
         })
     }
-    
 }
 
 // MARK - styling for just having a single line on bottom of text field

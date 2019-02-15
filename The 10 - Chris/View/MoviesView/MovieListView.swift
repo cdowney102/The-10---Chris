@@ -35,10 +35,14 @@ class MovieListView: UIView {
     }
 }
 
+// MARK - CV delegate methods
 extension MovieListView: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print()
+    }
 }
 
+// MARK - autolayout stuff
 extension MovieListView {
     private func setupCV() {
         let layout = UICollectionViewFlowLayout()
@@ -61,7 +65,7 @@ extension MovieListView {
     }
 }
 
-
+// MARK - collectionView cell styling
 extension MovieListView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width / 2 - 10, height: collectionView.frame.height / 2.3)
