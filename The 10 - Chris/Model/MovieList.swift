@@ -17,7 +17,7 @@ struct MovieList: Decodable {
     var totalResults: Int
     var results: [Movie]
     
-    func initWith(data: Data) -> MovieList? {
+    func initWithData(data: Data) -> MovieList? {
         do {
             return try JSONDecoder().decode(MovieList.self, from: data)
         } catch let error {

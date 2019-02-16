@@ -53,12 +53,30 @@ class HomeController: UIViewController {
         
         pageController.setViewControllers([self.nowPlayingController], direction: .forward, animated: false, completion: nil)
         
+        APIManager.shared.fetch(ListType.genres) { (list: GenreList?, error: Error?) in
+            if let error = error {
+                print(error)
+            } else {
+                DispatchQueue.main.async {
+                    if let list = list {
+                        print(list.genres.first?.name)
+                        GenreList.shared = list.genres
+                        // MARK - limit results to 10 per requirements
+                        //                        DataManager.shared.setNowPlayingList(with: reducedList)
+//                        print("got genre: \(list.results.first?.title ?? "--")")
+//                        self.nowPlayingController.dataSource.movies = reducedList
+                    }
+                }
+            }
+        }
+        
         APIManager.shared.fetch(ListType.nowPlaying) { (list: MovieList?, error: Error?) in
             if let error = error {
                 print(error)
             } else {
                 DispatchQueue.main.async {
                     if let list = list {
+                        print(list.results.first?.genres)
                         // MARK - limit results to 10 per requirements
                         var reducedList = [Movie]()
                         if list.results.count > 10 {

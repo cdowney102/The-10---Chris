@@ -46,6 +46,5 @@ struct Movie: Decodable, Equatable {
         let list = genreNames?.joined(separator: ", ")
         
         return list ?? ""
-    }
-    
+    } 
 }

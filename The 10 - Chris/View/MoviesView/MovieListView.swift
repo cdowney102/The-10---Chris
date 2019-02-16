@@ -56,7 +56,8 @@ extension MovieListView: UICollectionViewDelegate {
         let movie = dataSource.retrieveMovie(at: indexPath.row)
         print(movie.title)
         DataManager.shared.setSelectedMovie(with: movie)
-        #error("time to segue")
+        print("SEGUE")
+        #warning("time to segue")
     }
 }
 
