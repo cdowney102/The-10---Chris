@@ -28,6 +28,8 @@ struct Movie: Decodable, Equatable {
     var adult: Bool
     var video: Bool
     
+    
+    
     static func ==(lhs: Movie, rhs: Movie) -> Bool {
         return lhs.id == rhs.id
     }

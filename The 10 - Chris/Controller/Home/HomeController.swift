@@ -53,7 +53,7 @@ class HomeController: UIViewController {
         
         pageController.setViewControllers([self.nowPlayingController], direction: .forward, animated: false, completion: nil)
         
-        APIManager.shared.fetch(ListType.genres) { (list: GenreList?, error: Error?) in
+        APIManager.shared.fetchList(ListType.genres) { (list: GenreList?, error: Error?) in
             if let error = error {
                 print(error)
             } else {
@@ -70,7 +70,7 @@ class HomeController: UIViewController {
             }
         }
         
-        APIManager.shared.fetch(ListType.nowPlaying) { (list: MovieList?, error: Error?) in
+        APIManager.shared.fetchList(ListType.nowPlaying) { (list: MovieList?, error: Error?) in
             if let error = error {
                 print(error)
             } else {
@@ -92,7 +92,7 @@ class HomeController: UIViewController {
             }
         }
 
-        APIManager.shared.fetch(ListType.upcoming) { (list: MovieList?, error: Error?) in
+        APIManager.shared.fetchList(ListType.upcoming) { (list: MovieList?, error: Error?) in
             if let error = error {
                 print(error)
             } else {

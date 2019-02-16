@@ -56,10 +56,16 @@ extension MovieListView: UICollectionViewDelegate {
         guard let dataSource = dataSource else { return }
         DataManager.shared.clearSelectedMovie()
         let movie = dataSource.retrieveMovie(at: indexPath.row)
-        print(movie.title)
-        print("SEGUE")
-        #warning("time to segue")
         selectionDelegate?.didSelectMovie(movie)
+        #warning("API call for details")
+        APIManager.shared.fetchMovieDetails(movieId: movie.id) { (list: Movie?, error) in
+            //
+            if let error = error {
+                print(error)
+            } else {
+                print(list)
+            }
+        }
     }
 }
 
