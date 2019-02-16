@@ -12,6 +12,8 @@ import UIKit
 // MARK - main view for movieCollectionViewController
 class MovieListView: UIView {
     
+    weak var selectionDelegate: MovieSelectionDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -55,9 +57,9 @@ extension MovieListView: UICollectionViewDelegate {
         DataManager.shared.clearSelectedMovie()
         let movie = dataSource.retrieveMovie(at: indexPath.row)
         print(movie.title)
-        DataManager.shared.setSelectedMovie(with: movie)
         print("SEGUE")
         #warning("time to segue")
+        selectionDelegate?.didSelectMovie(movie)
     }
 }
 

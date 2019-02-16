@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8343B3C42218888200F30FC3 /* MovieSelectionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8343B3C32218888200F30FC3 /* MovieSelectionProtocol.swift */; };
 		837ECD35221749E2007DE164 /* ScaledImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837ECD34221749E2007DE164 /* ScaledImageView.swift */; };
 		837ECD3722174EB9007DE164 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837ECD3622174EB9007DE164 /* UIView+Extensions.swift */; };
 		83B664652213AB050058917D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B664642213AB050058917D /* AppDelegate.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8343B3C32218888200F30FC3 /* MovieSelectionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSelectionProtocol.swift; sourceTree = "<group>"; };
 		837ECD34221749E2007DE164 /* ScaledImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledImageView.swift; sourceTree = "<group>"; };
 		837ECD3622174EB9007DE164 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		83B664612213AB050058917D /* The 10 - Chris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The 10 - Chris.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -202,6 +204,7 @@
 				83C233E42214F8B100943F85 /* MovieCollectionViewController.swift */,
 				83C233E72214FA4B00943F85 /* MovieDataSource.swift */,
 				83C233ED2214FBD100943F85 /* MovieCell.swift */,
+				8343B3C32218888200F30FC3 /* MovieSelectionProtocol.swift */,
 			);
 			path = MovieCV;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				83B664832213B26B0058917D /* APIManager.swift in Sources */,
 				83C233EC2214FAFD00943F85 /* DataManager.swift in Sources */,
 				83C233E12214F7BB00943F85 /* MovieListView.swift in Sources */,
+				8343B3C42218888200F30FC3 /* MovieSelectionProtocol.swift in Sources */,
 				83C233E82214FA4B00943F85 /* MovieDataSource.swift in Sources */,
 				83B6647F2213AD860058917D /* Colors.swift in Sources */,
 				83C233DC2214D76C00943F85 /* Fonts.swift in Sources */,

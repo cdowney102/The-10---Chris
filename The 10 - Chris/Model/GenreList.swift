@@ -17,11 +17,11 @@ struct GenreList: Decodable {
     
     var genres: [Genre]
     
-    func initWith(data: Data) -> GenreList? {
+    func initWithData(data: Data) -> GenreList? {
         do {
             return try JSONDecoder().decode(GenreList.self, from: data)
         } catch {
-            print("failed to decode genre list")
+            print("GL decoding error")
             return nil
         }
     }

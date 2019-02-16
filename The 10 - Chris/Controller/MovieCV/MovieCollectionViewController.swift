@@ -27,6 +27,7 @@ class MovieCollectionViewController: UIViewController {
         super.viewDidLoad()
         
         movieListView = MovieListView(frame: self.view.bounds)
+        movieListView.selectionDelegate = self
         view.addSubview(self.movieListView)
         movieListView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         movieListView.dataSource = self.dataSource
@@ -38,4 +39,12 @@ class MovieCollectionViewController: UIViewController {
     }
 }
 
-
+// MARK - delegate methods for user selected movie protocol
+extension MovieCollectionViewController: MovieSelectionDelegate {
+    func didSelectMovie(_ movie: Movie) {
+        DataManager.shared.setSelectedMovie(with: movie)
+        let nextVC = UIViewController()
+        nextVC.view.backgroundColor = .purple
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
+}

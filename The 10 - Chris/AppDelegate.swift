@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // MARK - set initial root view controller
         let root = HomeController()
         let navController = UINavigationController(rootViewController: root)
+        navController.interactivePopGestureRecognizer?.delegate = nil
         
         window?.rootViewController = navController
         

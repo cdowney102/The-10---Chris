@@ -38,10 +38,10 @@ struct Movie: Decodable, Equatable {
     
     // MARK - This will hold all the genre names for the movie
     var genres: String {
-        // MARK - fetch genre struct for movie
-        let matchedGenres: [Genre]? = GenreList.shared?.filter({ genreIds.contains($0.id) })
+        // MARK - fetch genre struct for movie --
+        let matchedGenres: [Genre]? = GenreList.shared?.filter { genreIds.contains($0.id) }
         // MARK - we only care about the genre name
-        let genreNames = matchedGenres?.map({ $0.name })
+        let genreNames = matchedGenres?.map { $0.name }
         // MARK - return a string list of the genre names
         let list = genreNames?.joined(separator: ", ")
         
