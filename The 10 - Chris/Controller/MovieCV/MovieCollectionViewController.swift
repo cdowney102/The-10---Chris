@@ -20,31 +20,22 @@ class MovieCollectionViewController: UIViewController {
     var movieListView: MovieListView!
     
     func search(for searchString: String?) {
-        self.dataSource?.search(for: searchString)
+        dataSource?.search(for: searchString)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.movieListView = MovieListView(frame: self.view.bounds)
-        self.view.addSubview(self.movieListView)
-        self.movieListView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.movieListView.dataSource = self.dataSource
-        self.dataSource.collectionView = self.movieListView?.movieCollectionView
+        movieListView = MovieListView(frame: self.view.bounds)
+        view.addSubview(self.movieListView)
+        movieListView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        movieListView.dataSource = self.dataSource
+        dataSource.collectionView = self.movieListView?.movieCollectionView
     }
     
     func reloadData() {
-        self.movieListView?.movieCollectionView.reloadData()
+        movieListView?.movieCollectionView.reloadData()
     }
 }
 
-// MARK - styling
-//extension MovieCollectionViewController: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: collectionView.frame.width / 2 - 10, height: collectionView.frame.height / 2)
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return 10
-//    }
-//}
+

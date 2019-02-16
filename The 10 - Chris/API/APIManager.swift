@@ -18,6 +18,8 @@ class APIManager {
     func fetch<T: Decodable>(_ listType: ListType, completionHandler: @escaping (T?, Error?) -> ()) {
         // http://image.tmdb.org/t/p/w185/xRWht48C2V8XNfzvPehyClOvDni.jpg -- [poster path]
         // https://api.themoviedb.org/3/genre/movie/list?api_key=d52f2a679c2747d1798778bf535c1989
+        // https://api.themoviedb.org/3/now_playing?api_key=d52f2a679c2747d1798778bf535c1989
+        // https://api.themoviedb.org/3/movie/now_playing?api_key=<<api_key>>&language=en-US&page=1
         let base = APIManager.baseURL.appendingPathComponent(listType.rawValue)
         var urlComponents = URLComponents(url: base, resolvingAgainstBaseURL: true)
         urlComponents?.queryItems = [URLQueryItem(name: "api_key", value: apiKey)]

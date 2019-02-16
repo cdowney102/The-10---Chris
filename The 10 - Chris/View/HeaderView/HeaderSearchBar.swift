@@ -31,15 +31,10 @@ class HeaderSearchBar: UITextField {
     }()
     
     private func configure() {
-        translatesAutoresizingMaskIntoConstraints = false
-        clearButtonMode = .whileEditing
-        textAlignment = .left
-        textColor = UIColor.searchLabel
-        font = UIFont.regularText
-        attributedPlaceholder = NSAttributedString(string: "MOVIES", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholder, NSAttributedString.Key.font: UIFont.searchBarPlaceholder!])
-        
+        style()
         addBottomBorder()
-        
+        delegate = self
+        // MARK - set listener for user typing
         self.addTarget(self, action: #selector(textChanged), for: .editingChanged)
     }
     
@@ -55,6 +50,15 @@ class HeaderSearchBar: UITextField {
 
 // MARK - styling for just having a single line on bottom of text field
 extension HeaderSearchBar {
+    private func style() {
+        translatesAutoresizingMaskIntoConstraints = false
+        clearButtonMode = .whileEditing
+        textAlignment = .left
+        textColor = UIColor.searchLabel
+        font = UIFont.regularText
+        attributedPlaceholder = NSAttributedString(string: "MOVIES", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholder, NSAttributedString.Key.font: UIFont.searchBarPlaceholder!])
+    }
+    
     private func addBottomBorder() {
         addSubview(bottomLine)
         NSLayoutConstraint.activate([
@@ -63,5 +67,12 @@ extension HeaderSearchBar {
             bottomLine.rightAnchor.constraint(equalTo: self.rightAnchor),
             bottomLine.topAnchor.constraint(equalTo: self.bottomAnchor)
             ])
+    }
+}
+
+extension HeaderSearchBar: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

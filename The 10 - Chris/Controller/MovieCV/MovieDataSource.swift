@@ -9,7 +9,7 @@
 
 import UIKit
 
-class MoviesDataSource: NSObject, UICollectionViewDataSource {
+class MoviesDataSource: NSObject {
     // array for filtering movies during search
     var foundMovies: [Movie]?
     // reference to CV in screen
@@ -17,8 +17,14 @@ class MoviesDataSource: NSObject, UICollectionViewDataSource {
     
     var movies = [Movie]() {
         didSet {
+            print(movies.count)
             collectionView?.reloadData()
         }
+    }
+    
+    func retrieveMovie(at index: Int) -> Movie {
+        let movie = movies[index]
+        return movie
     }
     
     func search(for searchString: String?) {
@@ -30,10 +36,12 @@ class MoviesDataSource: NSObject, UICollectionViewDataSource {
         }
         collectionView?.reloadData()
     }
+}
+
+// MARK - cv methods
+extension MoviesDataSource: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        #warning("need to move this dm thing")
-        movies = DataManager.shared.nowPlaying
         return foundMovies?.count ?? movies.count
     }
     

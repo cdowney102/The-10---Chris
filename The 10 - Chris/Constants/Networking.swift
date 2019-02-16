@@ -31,11 +31,9 @@ enum ListType: String {
     var rawValue: String {
         switch self {
         case .nowPlaying:
-            return "now_playing"
+            return "movie/now_playing"
         case .genres:
             return "genre/movie/list"
-        case .poster:
-            return "http://image.tmdb.org/t/p/w185/"
         default:
             return "movie/upcoming"
         }

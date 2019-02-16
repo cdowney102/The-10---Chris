@@ -12,7 +12,7 @@ class HomeController: UIViewController {
     var pageController: UIPageViewController!
     
     var nowPlayingController: MovieCollectionViewController!
-    var upcomingController: MovieCollectionViewController!
+    var comingSoonController: MovieCollectionViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,56 +48,69 @@ class HomeController: UIViewController {
         
         pageController.didMove(toParent: self)
         
-        upcomingController = MovieCollectionViewController(dataSource:  MoviesDataSource())
+        comingSoonController = MovieCollectionViewController(dataSource:  MoviesDataSource())
         nowPlayingController = MovieCollectionViewController(dataSource: MoviesDataSource())
         
         pageController.setViewControllers([self.nowPlayingController], direction: .forward, animated: false, completion: nil)
         
+        APIManager.shared.fetch(ListType.nowPlaying) { (list: MovieList?, error: Error?) in
+            if let error = error {
+                print(error)
+            } else {
+                DispatchQueue.main.async {
+                    if let list = list {
+                        // MARK - limit results to 10 per requirements
+                        var reducedList = [Movie]()
+                        if list.results.count > 10 {
+                            reducedList = Array(list.results[0..<10])
+                        } else {
+                            reducedList = list.results
+                        }
+//                        DataManager.shared.setNowPlayingList(with: reducedList)
+                        print("got np: \(list.results.first?.title ?? "--")")
+                        self.nowPlayingController.dataSource.movies = reducedList
+                    }
+                }
+            }
+        }
+
         APIManager.shared.fetch(ListType.upcoming) { (list: MovieList?, error: Error?) in
             if let error = error {
                 print(error)
             } else {
                 DispatchQueue.main.async {
                     if let list = list {
-                        DataManager.shared.setNowPlayingList(with: list.results)
-                        print("got data")
-                        self.nowPlayingController.dataSource.movies = list.results
+                        // MARK - limit results to 10 per requirements
+                        var reducedList = [Movie]()
+                        if list.results.count > 10 {
+                            reducedList = Array(list.results[0..<10])
+                        } else {
+                            reducedList = list.results
+                        }
+//                        DataManager.shared.setComingSoonList(with: reducedList)
+                        self.comingSoonController.dataSource.movies = reducedList
+                        print("got upcoming: \(list.results.first?.title ?? "--")")
+                        
                     }
                 }
             }
         }
-        #warning("gracefully handle delay while images load")
-        APIManager.shared.fetch(ListType.upcoming) { (list: MovieList?, error: Error?) in
-            if let error = error {
-                print(error)
-            } else {
-                DispatchQueue.main.async {
-                    if let list = list {
-                        DataManager.shared.setComingSoonList(with: list.results)
-                        self.upcomingController.dataSource.movies = list.results
-                        print("got data")
-                    }
-                }
-            }
-        }
-        
     }
 
     func search(for searchString: String?) {
         nowPlayingController.search(for: searchString)
-        upcomingController.search(for: searchString)
+        comingSoonController.search(for: searchString)
     }
-    
 }
 
 extension HomeController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if viewController == nowPlayingController { return upcomingController }
+        if viewController == nowPlayingController { return comingSoonController }
         return nil
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if viewController == upcomingController { return nowPlayingController }
+        if viewController == comingSoonController { return nowPlayingController }
         return nil
     }
 

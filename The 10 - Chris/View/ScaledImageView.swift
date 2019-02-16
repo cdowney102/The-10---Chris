@@ -24,11 +24,11 @@ class ScaleImageView: UIView {
         guard let image = self.image else { return }
         // grab ratios and rect size
         let imageRatio = image.size.width / image.size.height
-        let myAspectRatio = self.bounds.width / self.bounds.height
+        let currentAspectRation = self.bounds.width / self.bounds.height
         var renderSize = self.bounds.size
         // if its wider/ taller we need to shrink it
-        if imageRatio < myAspectRatio {
-            renderSize.width = self.bounds.height * imageRatio
+        if imageRatio < currentAspectRation {
+            renderSize.width = self.bounds.height * imageRatio 
         } else {
             renderSize.height = self.bounds.width / imageRatio
         }

@@ -11,21 +11,17 @@ import UIKit
 class DataManager {
     
     static let shared = DataManager()
-    #warning("grab only first 10")
+
     var nowPlaying = [Movie]()
     var comingSoon = [Movie]()
+    var selectedMovie: Movie? = nil
     
-    func setNowPlayingList(with movies: [Movie]) {
-        self.nowPlaying = movies
+    func setSelectedMovie(with movie: Movie) {
+        DataManager.shared.selectedMovie = movie
     }
     
-    func setComingSoonList(with movies: [Movie]) {
-        DataManager.shared.comingSoon = movies
+    func clearSelectedMovie() {
+        DataManager.shared.selectedMovie = nil
     }
-    
-    func fetchMovies() {
-        
-    }
-    
 }
 

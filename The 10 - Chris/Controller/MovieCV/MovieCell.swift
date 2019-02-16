@@ -28,7 +28,7 @@ class MovieCell: UICollectionViewCell {
         let imageView = ScaleImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = #imageLiteral(resourceName: "aqua")
-        imageView.backgroundColor = .clear
+        imageView.backgroundColor = UIColor.clear
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         return imageView
@@ -65,6 +65,8 @@ class MovieCell: UICollectionViewCell {
     }()
     
     private func configure() {
+//        self.layer.borderColor = UIColor.yellow.cgColor
+//        self.layer.borderWidth = 1
         backgroundColor = UIColor.clear
         setupRating()
         setupTitle()
