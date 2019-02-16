@@ -11,10 +11,7 @@
 import Foundation
 
 struct MovieList: Decodable {
-    
-    var page: Int
-    var totalPages: Int
-    var totalResults: Int
+
     var results: [Movie]
     
     func initWithData(data: Data) -> MovieList? {

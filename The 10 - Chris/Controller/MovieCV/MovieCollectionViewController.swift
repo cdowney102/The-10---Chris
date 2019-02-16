@@ -42,9 +42,26 @@ class MovieCollectionViewController: UIViewController {
 // MARK - delegate methods for user selected movie protocol
 extension MovieCollectionViewController: MovieSelectionDelegate {
     func didSelectMovie(_ movie: Movie) {
+        //set selected movie to get basic info
+        DataManager.shared.clearSelectedMovie()
         DataManager.shared.setSelectedMovie(with: movie)
-        let nextVC = UIViewController()
-        nextVC.view.backgroundColor = .purple
-        navigationController?.pushViewController(nextVC, animated: true)
+        
+        APIManager.shared.fetchMovieDetails(movieId: movie.id) { [ weak self ] (details: MovieDetails?, error) in
+            if let error = error {
+                print(error)
+            } else {
+                // set detailed info for movie now with query results
+                DataManager.shared.setSelectedMovieDetails(with: details!)
+                self?.segue()
+            }
+        }
+    }
+    
+    private func segue() {
+        DispatchQueue.main.async {
+            let nextVC = DetailsController()
+            nextVC.view.backgroundColor = .purple
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
     }
 }

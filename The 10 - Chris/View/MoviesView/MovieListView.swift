@@ -53,19 +53,11 @@ class MovieListView: UIView {
 // MARK - CV delegate methods
 extension MovieListView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         guard let dataSource = dataSource else { return }
-        DataManager.shared.clearSelectedMovie()
+        
         let movie = dataSource.retrieveMovie(at: indexPath.row)
         selectionDelegate?.didSelectMovie(movie)
-        #warning("API call for details")
-        APIManager.shared.fetchMovieDetails(movieId: movie.id) { (list: Movie?, error) in
-            //
-            if let error = error {
-                print(error)
-            } else {
-                print(list)
-            }
-        }
     }
 }
 

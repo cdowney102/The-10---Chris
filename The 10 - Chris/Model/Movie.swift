@@ -27,9 +27,7 @@ struct Movie: Decodable, Equatable {
     
     var adult: Bool
     var video: Bool
-    
-    
-    
+
     static func ==(lhs: Movie, rhs: Movie) -> Bool {
         return lhs.id == rhs.id
     }
@@ -48,5 +46,9 @@ struct Movie: Decodable, Equatable {
         let list = genreNames?.joined(separator: ", ")
         
         return list ?? ""
-    } 
+    }
+    
+    var cast: [CastMember]?
+    var directors: String?
+    var productionCompanies: String?
 }

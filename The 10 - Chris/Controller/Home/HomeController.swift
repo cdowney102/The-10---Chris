@@ -59,12 +59,7 @@ class HomeController: UIViewController {
             } else {
                 DispatchQueue.main.async {
                     if let list = list {
-                        print(list.genres.first?.name)
                         GenreList.shared = list.genres
-                        // MARK - limit results to 10 per requirements
-                        //                        DataManager.shared.setNowPlayingList(with: reducedList)
-//                        print("got genre: \(list.results.first?.title ?? "--")")
-//                        self.nowPlayingController.dataSource.movies = reducedList
                     }
                 }
             }
@@ -76,7 +71,6 @@ class HomeController: UIViewController {
             } else {
                 DispatchQueue.main.async {
                     if let list = list {
-                        print(list.results.first?.genres)
                         // MARK - limit results to 10 per requirements
                         var reducedList = [Movie]()
                         if list.results.count > 10 {
@@ -84,8 +78,6 @@ class HomeController: UIViewController {
                         } else {
                             reducedList = list.results
                         }
-//                        DataManager.shared.setNowPlayingList(with: reducedList)
-                        print("got np: \(list.results.first?.title ?? "--")")
                         self.nowPlayingController.dataSource.movies = reducedList
                     }
                 }
@@ -105,10 +97,7 @@ class HomeController: UIViewController {
                         } else {
                             reducedList = list.results
                         }
-//                        DataManager.shared.setComingSoonList(with: reducedList)
                         self.comingSoonController.dataSource.movies = reducedList
-                        print("got upcoming: \(list.results.first?.title ?? "--")")
-                        
                     }
                 }
             }

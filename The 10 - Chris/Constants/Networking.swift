@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum JobType: String {
+    case director = "Director"
+}
+
 enum ImageType: String {
     case poster
     case backdrop

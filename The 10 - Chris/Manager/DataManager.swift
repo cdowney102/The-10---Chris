@@ -20,8 +20,34 @@ class DataManager {
         DataManager.shared.selectedMovie = movie
     }
     
+    func setSelectedMovieDetails(with details: MovieDetails) {
+        if let _ = DataManager.shared.selectedMovie {
+            setDirectorList(with: details.credits.crew)
+            setCastList(with: details.credits.cast)
+            setProductionCompanyList(with: details.productionCompanies)
+        }
+    }
+    
     func clearSelectedMovie() {
         DataManager.shared.selectedMovie = nil
     }
 }
 
+// MARK - sorting / simplifying methods
+extension DataManager {
+    private func setDirectorList(with list: [CrewMember]) {
+        // MARK - filter for directors only from crew
+        let directorList = list.filter { $0.job == JobType.director.rawValue }
+        DataManager.shared.selectedMovie?.directors = directorList.map {$0.name}.joined(separator: ", ")
+    }
+    
+    private func setCastList(with list: [CastMember]) {
+        // we are displaying images, so dont need the person if they dont have an image
+        DataManager.shared.selectedMovie?.cast = list.filter { $0.profilePath != nil }
+    }
+    
+    private func setProductionCompanyList(with list: [ProductionCompany]) {
+        // Stringify production companies
+        DataManager.shared.selectedMovie?.productionCompanies = list.map { $0.name }.joined(separator: ", ")
+    }
+}
