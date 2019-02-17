@@ -83,7 +83,7 @@ class APIManager {
         // https://api.themoviedb.org/3/movie/6547?api_key=d52f2a679c2747d1798778bf535c1989&language=en-US&append_to_response=credits
 
         let base = baseUrlPath + "movie/\(movieId)?api_key=\(apiKey)&language=en-US&append_to_response=credits,release_dates"
-        print(base)
+//        print(base)
         guard let url = URL(string: base) else {
             completionHandler(nil, APIError.badURL)
             return

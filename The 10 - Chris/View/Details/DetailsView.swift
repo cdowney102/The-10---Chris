@@ -15,8 +15,9 @@ class DetailsView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+   
         configure()
+
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -54,12 +55,19 @@ extension DetailsView {
         addSubview(synopsisView)
         bringSubviewToFront(synopsisView)
         synopsisView.layer.zPosition = 99
-        let width = self.frame.width - 10
+        let width = self.frame.width * 0.85
         NSLayoutConstraint.activate([
-            synopsisView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -75),
+            synopsisView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -65),
             synopsisView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            synopsisView.heightAnchor.constraint(equalToConstant: width + 50),
+            synopsisView.heightAnchor.constraint(equalToConstant: width),
             synopsisView.widthAnchor.constraint(equalToConstant: width),
             ])
+    }
+}
+
+// MARK - set details data w selected movie
+extension DetailsView {
+    func setViewData(for movie: Movie) {
+        synopsisView.setViewData(for: movie)
     }
 }

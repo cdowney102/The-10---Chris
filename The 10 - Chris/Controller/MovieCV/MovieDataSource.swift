@@ -17,7 +17,6 @@ class MoviesDataSource: NSObject {
     
     var movies = [Movie]() {
         didSet {
-            print(movies.count)
             collectionView?.reloadData()
         }
     }

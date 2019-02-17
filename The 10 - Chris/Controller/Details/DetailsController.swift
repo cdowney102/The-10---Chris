@@ -19,10 +19,11 @@ class DetailsController: UIViewController {
             self.movie = movie
         }
         
-        let details = DetailsView(frame: view.frame)
+        let details = DetailsView(frame: view.bounds)
         view.addSubview(details)
         
         details.backdrop.downloadImage(imageType: ImageType.backdrop, path: movie.backdropPath ?? "")
+        details.setViewData(for: movie)
         
     }
     
