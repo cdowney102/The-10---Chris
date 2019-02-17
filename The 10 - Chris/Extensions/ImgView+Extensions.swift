@@ -53,7 +53,7 @@ extension ScaleImageView {
 extension UIImageView {
     func setStarRating(with rating: Double) {
         var star = #imageLiteral(resourceName: "Home Yellow Star-1")
-        if rating < 4 {
+        if rating < 4 && rating != 0 {
             star = #imageLiteral(resourceName: "Home Red Star-1")
         } else if rating > 7 {
             star = #imageLiteral(resourceName: "Home Green Star-1")

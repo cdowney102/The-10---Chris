@@ -24,9 +24,16 @@ class APIManager {
         
         // this path gets all info about a movie and its actors/ directors etc
         // https://api.themoviedb.org/3/movie/6547?api_key=d52f2a679c2747d1798778bf535c1989&language=en-US&append_to_response=credits
+        
+        // query upcomgin in US
+//        https://api.themoviedb.org/3/movie/upcoming?api_key=d52f2a679c2747d1798778bf535c1989&language=en-US&page=1&region=US
+        
+        // ucpong us
+//        https://api.themoviedb.org/3/movie/now_playing?api_key=d52f2a679c2747d1798778bf535c1989&language=en-US&page=1&region=US
+        
         let base = APIManager.baseURL.appendingPathComponent(listType.rawValue)
         var urlComponents = URLComponents(url: base, resolvingAgainstBaseURL: true)
-        urlComponents?.queryItems = [URLQueryItem(name: "api_key", value: apiKey)]
+        urlComponents?.queryItems = [URLQueryItem(name: "api_key", value: apiKey), URLQueryItem(name: "language", value: "en-US"), URLQueryItem(name: "page", value: "1"), URLQueryItem(name: "region", value: "US")]
         guard let url = urlComponents?.url else {
             completionHandler(nil, APIError.badURL)
             return
@@ -75,7 +82,7 @@ class APIManager {
         // this path gets all info about a movie and its actors/ directors etc
         // https://api.themoviedb.org/3/movie/6547?api_key=d52f2a679c2747d1798778bf535c1989&language=en-US&append_to_response=credits
 
-        let base = baseUrlPath + "movie/\(movieId)?api_key=\(apiKey)&language=en-US&append_to_response=credits"
+        let base = baseUrlPath + "movie/\(movieId)?api_key=\(apiKey)&language=en-US&append_to_response=credits,release_dates"
         print(base)
         guard let url = URL(string: base) else {
             completionHandler(nil, APIError.badURL)

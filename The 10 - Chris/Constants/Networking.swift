@@ -8,6 +8,12 @@
 
 import UIKit
 
+// MARK - for filtering by country mpaa rating -- api returns all caps
+enum Country: String {
+    case US = "US"
+}
+
+// for filtering by crew member job title
 enum JobType: String {
     case director = "Director"
 }

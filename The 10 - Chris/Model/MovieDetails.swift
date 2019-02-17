@@ -12,6 +12,7 @@ import Foundation
 struct MovieDetails: Decodable {
     let credits: Credits
     let productionCompanies: [ProductionCompany]
+    let releaseDates: ReleaseDates
 }
 
 // credits - cast and crew info
@@ -35,3 +36,19 @@ struct CrewMember: Decodable {
 struct ProductionCompany: Decodable {
     let name: String
 }
+
+// the movie rating (PG, R etc...) is found under release dates endpoint
+struct ReleaseDates: Decodable {
+    let results: [Certification]
+}
+
+struct Certification: Decodable {
+    let releaseDates: [RatingDetails]
+    // this is the letter rating in US
+    let iso31661: String
+}
+
+struct RatingDetails: Decodable {
+    let certification: String
+}
+

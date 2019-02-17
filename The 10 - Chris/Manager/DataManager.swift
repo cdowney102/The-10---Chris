@@ -25,6 +25,7 @@ class DataManager {
             setDirectorList(with: details.credits.crew)
             setCastList(with: details.credits.cast)
             setProductionCompanyList(with: details.productionCompanies)
+            setMpaaRating(with: details.releaseDates.results)
         }
     }
     
@@ -49,5 +50,19 @@ extension DataManager {
     private func setProductionCompanyList(with list: [ProductionCompany]) {
         // Stringify production companies
         DataManager.shared.selectedMovie?.productionCompanies = list.map { $0.name }.joined(separator: ", ")
+    }
+    
+    private func setMpaaRating(with details: [Certification]) {
+        // filter for US rating only
+        let usRating = details.filter { $0.iso31661 == Country.US.rawValue }
+        let reducedList = usRating[0].releaseDates
+        var finalRating = "Unrated"
+        for rating in reducedList {
+            if rating.certification != "" {
+                finalRating = rating.certification
+            }
+        }
+        #error("here got rating now handle it")
+        print(finalRating)
     }
 }

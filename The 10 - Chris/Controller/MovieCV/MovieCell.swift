@@ -83,7 +83,7 @@ extension MovieCell {
         let posterPath = movie.posterPath ?? ""
         movieImage.downloadImage(imageType: .poster, path: posterPath)
         movieTitle.text = movie.title
-        ratingLabel.text = "\(String(describing: movie.voteAverage))/10"
+        ratingLabel.text = setRating(movie.voteAverage)
         starImage.setStarRating(with: movie.voteAverage)
     }
 }
@@ -126,5 +126,16 @@ extension MovieCell {
             ratingLabel.leftAnchor.constraint(equalTo: starImage.rightAnchor, constant: 5),
             ratingLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),
             ])
+    }
+}
+
+// MARK - set rating and handle if upcoming movie unrated
+extension MovieCell {
+    func setRating(_ rating: Double) -> String {
+        var ratingText = "\(String(describing: rating))/10"
+        if rating == 0 {
+            ratingText = "TBD"
+        }
+        return ratingText
     }
 }
