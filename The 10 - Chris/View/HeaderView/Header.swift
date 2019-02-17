@@ -138,19 +138,18 @@ extension Header {
 
 // MARK - button actions
 extension Header {
-    func underlineButton() {
-        nowPlaying = !nowPlaying
-        if nowPlaying {
-            nowPlayingButton.setImage(#imageLiteral(resourceName: "nowplaying highlight"), for: .normal)
-            comingSoonButton.setImage(#imageLiteral(resourceName: "comingsoon"), for: .normal)
-            underlineOne.alpha = 1
-            underlineTwo.alpha = 0
-        } else {
-            nowPlayingButton.setImage(#imageLiteral(resourceName: "nowplaying"), for: .normal)
-            comingSoonButton.setImage(#imageLiteral(resourceName: "comingsoon highlight"), for: .normal)
-            underlineTwo.alpha = 1
-            underlineOne.alpha = 0
-        }
+    func highlightComingSoon() {
+        nowPlayingButton.setImage(#imageLiteral(resourceName: "nowplaying"), for: .normal)
+        comingSoonButton.setImage(#imageLiteral(resourceName: "comingsoon highlight"), for: .normal)
+        underlineOne.alpha = 0
+        underlineTwo.alpha = 1
+    }
+    
+    func highlightNowPlaying() {
+        nowPlayingButton.setImage(#imageLiteral(resourceName: "nowplaying highlight"), for: .normal)
+        comingSoonButton.setImage(#imageLiteral(resourceName: "comingsoon"), for: .normal)
+        underlineTwo.alpha = 0
+        underlineOne.alpha = 1
     }
     
     @objc private func comingSoonTapped() {

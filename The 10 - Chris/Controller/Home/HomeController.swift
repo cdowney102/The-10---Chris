@@ -128,9 +128,15 @@ extension HomeController: UIPageViewControllerDataSource, UIPageViewControllerDe
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        if !completed { return }
-        header.underlineButton()
-    }    
+        //prevent half-swipes/ cancelled swipes
+        if !completed || !finished { return }
+        let prev = previousViewControllers[0]
+        if prev == nowPlayingController {
+            header.highlightComingSoon()
+        } else {
+            header.highlightNowPlaying()
+        }
+    }
 }
 
 // MARK - header button actions
@@ -147,12 +153,14 @@ extension HomeController {
     }
     
     private func toComingSoon() {
-        header.underlineButton()
-        pageController.setViewControllers([self.comingSoonController], direction: .forward, animated: false, completion: nil)
+        pageController.setViewControllers([self.comingSoonController], direction: .forward, animated: false) { (_) in
+            self.header.highlightComingSoon()
+        }
     }
     
     private func toNowPlaying() {
-        header.underlineButton()
-        pageController.setViewControllers([self.nowPlayingController], direction: .forward, animated: false, completion: nil)
+        pageController.setViewControllers([self.nowPlayingController], direction: .forward, animated: false) { (_) in
+            self.header.highlightNowPlaying()
+        }
     }
 }
