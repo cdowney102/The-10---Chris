@@ -19,4 +19,5 @@ extension UIColor {
     static let buttonHighlighted = UIColor(red: 39/255, green: 180/255, blue: 122/255, alpha: 1)
     static let movieTitle = UIColor.white
     static let detailsRed = UIColor(red: 142/255, green: 30/255, blue: 46/255, alpha: 1)
+    static let viewShadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
 }

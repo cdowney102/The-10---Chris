@@ -102,12 +102,15 @@ class SynopsisView: UIView {
         tv.font = UIFont.detailsTextView
         tv.showsVerticalScrollIndicator = false
         tv.backgroundColor = .clear
+        tv.isSelectable = false
 //        tv.textContainerInset = UIEdgeInsets(top: 3, left: 0, bottom: 0, right: 0)
         return tv
     }()
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = UIColor.detailsRed
+        self.addShadow(cornerRadius: 10)
         setupBackground()
         setupTitle()
         setupImdbStar()
@@ -120,30 +123,30 @@ class SynopsisView: UIView {
 // MARK - auto layout code
 extension SynopsisView {
     private func setupBackground() {
-        addSubview(backgroundImage)
-        NSLayoutConstraint.activate([
-            backgroundImage.leftAnchor.constraint(equalTo: self.leftAnchor),
-            backgroundImage.topAnchor.constraint(equalTo: self.topAnchor),
-            backgroundImage.rightAnchor.constraint(equalTo: self.rightAnchor),
-            backgroundImage.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            ])
+//        addSubview(backgroundImage)
+//        NSLayoutConstraint.activate([
+//            backgroundImage.leftAnchor.constraint(equalTo: self.leftAnchor),
+//            backgroundImage.topAnchor.constraint(equalTo: self.topAnchor),
+//            backgroundImage.rightAnchor.constraint(equalTo: self.rightAnchor),
+//            backgroundImage.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+//            ])
     }
     
     private func setupTitle() {
         addSubview(movieTitleLabel)
         NSLayoutConstraint.activate([
-            movieTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5),
+            movieTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
             movieTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -25),
-            movieTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
-            movieTitleLabel.heightAnchor.constraint(equalToConstant: 70)
+            movieTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+            movieTitleLabel.heightAnchor.constraint(equalToConstant: 60)
             ])
     }
     
     private func setupImdbStar() {
         addSubview(imdbLogo)
         NSLayoutConstraint.activate([
-            imdbLogo.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5),
-            imdbLogo.topAnchor.constraint(equalTo: movieTitleLabel.bottomAnchor, constant: -5),
+            imdbLogo.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
+            imdbLogo.topAnchor.constraint(equalTo: movieTitleLabel.bottomAnchor, constant: -3),
             imdbLogo.heightAnchor.constraint(equalToConstant: 15),
             imdbLogo.widthAnchor.constraint(equalToConstant: 25)
             ])
@@ -160,7 +163,7 @@ extension SynopsisView {
     private func setupRatingAndDates() {
         addSubview(movieRatingLabel)
         NSLayoutConstraint.activate([
-            movieRatingLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5),
+            movieRatingLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
             movieRatingLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),
             movieRatingLabel.topAnchor.constraint(equalTo: imdbLogo.bottomAnchor, constant: 12),
             movieRatingLabel.heightAnchor.constraint(equalToConstant: 12)
@@ -170,7 +173,7 @@ extension SynopsisView {
     private func setupGenre() {
         addSubview(movieGenreLabel)
         NSLayoutConstraint.activate([
-            movieGenreLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5),
+            movieGenreLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
             movieGenreLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -25),
             movieGenreLabel.topAnchor.constraint(equalTo: movieRatingLabel.bottomAnchor, constant: 5),
             movieGenreLabel.heightAnchor.constraint(equalToConstant: 12)
@@ -180,17 +183,17 @@ extension SynopsisView {
     private func setupSynopsis() {
         addSubview(synopsisLabel)
         NSLayoutConstraint.activate([
-            synopsisLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5),
+            synopsisLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
             synopsisLabel.topAnchor.constraint(equalTo: movieGenreLabel.bottomAnchor, constant: 20),
             synopsisLabel.heightAnchor.constraint(equalToConstant: 15)
             ])
-        #warning("text is overlapping")
+
         addSubview(textView)
         NSLayoutConstraint.activate([
-            textView.leftAnchor.constraint(equalTo: self.leftAnchor),
-            textView.rightAnchor.constraint(equalTo: self.rightAnchor),
+            textView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 6),
+            textView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),
             textView.topAnchor.constraint(equalTo: synopsisLabel.bottomAnchor, constant: 4),
-            textView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20)
+            textView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5)
             ])
     }
 }

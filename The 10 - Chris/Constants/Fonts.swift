@@ -14,8 +14,9 @@ extension UIFont {
     static let synopsisRating = UIFont(name: "Avenir-Light", size: 12)
     static let searchBarPlaceholder = UIFont(name: "Avenir-Heavy", size: 24)
     static let cellTitle = UIFont(name: "Avenir-Light", size: 12)
-    static let synopsisTitle = UIFont(name: "Avenir-Medium", size: 18)
+    static let synopsisTitle = UIFont(name: "AvenirNext-Bold", size: 18)
     static let smallBold = UIFont(name: "Avenir-Heavy", size: 12)
     static let synopsisLabel = UIFont(name: "Avenir-Heavy", size: 14)
     static let detailsTextView = UIFont(name: "Avenir-Medium", size: 12)
+    static let directorCellTitle = UIFont(name: "AvenirNext-Bold", size: 12)
 }

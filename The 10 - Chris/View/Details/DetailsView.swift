@@ -17,7 +17,6 @@ class DetailsView: UIView {
         super.init(frame: frame)
    
         configure()
-
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -32,10 +31,21 @@ class DetailsView: UIView {
         return imageView
     }()
     
+    lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero)
+        tableView.backgroundColor = UIColor.detailsRed
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(DirectorCell.self, forCellReuseIdentifier: DirectorCell.identifier)
+        tableView.delegate = self
+        tableView.dataSource = self
+        return tableView
+    }()
+    
     private func configure() {
         backgroundColor = UIColor.detailsRed
         setupBackdrop()
         setupSynopsis()
+        setupTableView()
     }
 }
 
@@ -55,12 +65,22 @@ extension DetailsView {
         addSubview(synopsisView)
         bringSubviewToFront(synopsisView)
         synopsisView.layer.zPosition = 99
-        let width = self.frame.width * 0.85
+        let width = self.frame.width * 0.9
         NSLayoutConstraint.activate([
             synopsisView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -65),
             synopsisView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            synopsisView.heightAnchor.constraint(equalToConstant: width),
+            synopsisView.heightAnchor.constraint(equalToConstant: width - 50),
             synopsisView.widthAnchor.constraint(equalToConstant: width),
+            ])
+    }
+    
+    private func setupTableView() {
+        addSubview(tableView)
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: synopsisView.bottomAnchor, constant: 15),
+            tableView.leftAnchor.constraint(equalTo: synopsisView.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: synopsisView.rightAnchor),
+            tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
             ])
     }
 }
@@ -69,5 +89,35 @@ extension DetailsView {
 extension DetailsView {
     func setViewData(for movie: Movie) {
         synopsisView.setViewData(for: movie)
+    }
+}
+
+// MARK - tableview delegate methods
+extension DetailsView: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let movie = DataManager.shared.selectedMovie else { return UITableViewCell() }
+        
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: DirectorCell.identifier, for: indexPath) as! DirectorCell
+            cell.setCellData(for: movie)
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: CastCell.identifier, for: indexPath) as! CastCell
+            cell.setCellData(for: movie)
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 55
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
 }
