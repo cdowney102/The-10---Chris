@@ -13,6 +13,7 @@ class HomeController: UIViewController {
     
     var nowPlayingController: MovieCollectionViewController!
     var comingSoonController: MovieCollectionViewController!
+    var header: Header!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +21,8 @@ class HomeController: UIViewController {
         view.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Home Background"))
         navigationController?.setNavigationBarHidden(true, animated: false)
         
-        let header = Header(frame: .zero)
+        header = Header(frame: .zero)
+        
         view.addSubview(header)
         NSLayoutConstraint.activate([
             header.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
@@ -35,6 +37,7 @@ class HomeController: UIViewController {
         pageController.willMove(toParent: self)
         addChild(self.pageController)
         pageController.dataSource = self
+        pageController.delegate = self
         view.addSubview(self.pageController.view)
         
         pageController.view.translatesAutoresizingMaskIntoConstraints = false
@@ -110,7 +113,7 @@ class HomeController: UIViewController {
     }
 }
 
-extension HomeController: UIPageViewControllerDataSource {
+extension HomeController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         if viewController == nowPlayingController { return comingSoonController }
         return nil
@@ -120,5 +123,9 @@ extension HomeController: UIPageViewControllerDataSource {
         if viewController == comingSoonController { return nowPlayingController }
         return nil
     }
-
+    
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        header.underlineButton()
+        
+    }
 }

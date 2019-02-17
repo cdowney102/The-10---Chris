@@ -62,7 +62,6 @@ extension DataManager {
                 finalRating = rating.certification
             }
         }
-        #error("here got rating now handle it")
-        print(finalRating)
+        DataManager.shared.selectedMovie?.mpaaRating = finalRating
     }
 }

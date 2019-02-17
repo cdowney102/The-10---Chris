@@ -16,6 +16,7 @@ class Header: UIView, UICollectionViewDelegate, UICollectionViewDelegateFlowLayo
 
     var nowPlayingAction: (() -> Void)?
     var comingSoonAction: (() -> Void)?
+    var nowPlaying = true
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -107,7 +108,7 @@ extension Header {
             nowPlayingButton.widthAnchor.constraint(equalToConstant: 100),
             nowPlayingButton.heightAnchor.constraint(equalToConstant: 30),
             ])
-        #warning("have these alpha animate in quickly for nice effect")
+
         addSubview(underlineOne)
         NSLayoutConstraint.activate([
             underlineOne.leftAnchor.constraint(equalTo: nowPlayingButton.leftAnchor, constant: 15),
@@ -125,6 +126,7 @@ extension Header {
             ])
         
         addSubview(underlineTwo)
+        underlineTwo.alpha = 0
         NSLayoutConstraint.activate([
             underlineTwo.leftAnchor.constraint(equalTo: comingSoonButton.leftAnchor, constant: 15),
             underlineTwo.rightAnchor.constraint(equalTo: comingSoonButton.rightAnchor, constant: -15),
@@ -136,6 +138,21 @@ extension Header {
 
 // MARK - button actions
 extension Header {
+    func underlineButton() {
+        nowPlaying = !nowPlaying
+        if nowPlaying {
+            nowPlayingButton.setImage(#imageLiteral(resourceName: "nowplaying highlight"), for: .normal)
+            comingSoonButton.setImage(#imageLiteral(resourceName: "comingsoon"), for: .normal)
+            underlineOne.alpha = 1
+            underlineTwo.alpha = 0
+        } else {
+            nowPlayingButton.setImage(#imageLiteral(resourceName: "nowplaying"), for: .normal)
+            comingSoonButton.setImage(#imageLiteral(resourceName: "comingsoon highlight"), for: .normal)
+            underlineTwo.alpha = 1
+            underlineOne.alpha = 0
+        }
+    }
+    
     @objc private func comingSoonTapped() {
         comingSoonAction?()
     }

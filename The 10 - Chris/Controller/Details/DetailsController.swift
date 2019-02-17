@@ -13,13 +13,11 @@ class DetailsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        print(DataManager.shared.selectedMovie?.cast?.count)
     }
     
     // MARK - free up selected movie
     override func viewWillDisappear(_ animated: Bool) {
         DataManager.shared.clearSelectedMovie()
     }
-
-    
-
 }
