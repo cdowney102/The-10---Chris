@@ -56,6 +56,8 @@ class HomeController: UIViewController {
         
         pageController.setViewControllers([self.nowPlayingController], direction: .forward, animated: false, completion: nil)
         
+        setupHeaderBtnActions()
+        
         APIManager.shared.fetchList(ListType.genres) { (list: GenreList?, error: Error?) in
             if let error = error {
                 print(error)
@@ -113,6 +115,7 @@ class HomeController: UIViewController {
     }
 }
 
+// MARK - page controller delegate methods
 extension HomeController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         if viewController == nowPlayingController { return comingSoonController }
@@ -125,7 +128,31 @@ extension HomeController: UIPageViewControllerDataSource, UIPageViewControllerDe
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        if !completed { return }
         header.underlineButton()
-        
+    }    
+}
+
+// MARK - header button actions
+extension HomeController {
+    private func setupHeaderBtnActions() {
+        header.comingSoonAction = { [ weak self ] in
+            guard let strongSelf = self else { return }
+            strongSelf.toComingSoon()
+        }
+        header.nowPlayingAction = { [ weak self ] in
+            guard let strongSelf = self else { return }
+            strongSelf.toNowPlaying()
+        }
+    }
+    
+    private func toComingSoon() {
+        header.underlineButton()
+        pageController.setViewControllers([self.comingSoonController], direction: .forward, animated: false, completion: nil)
+    }
+    
+    private func toNowPlaying() {
+        header.underlineButton()
+        pageController.setViewControllers([self.nowPlayingController], direction: .forward, animated: false, completion: nil)
     }
 }
