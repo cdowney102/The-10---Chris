@@ -13,6 +13,7 @@ struct MovieDetails: Decodable {
     let credits: Credits
     let productionCompanies: [ProductionCompany]
     let releaseDates: ReleaseDates
+    let runtime: Int?
 }
 
 // credits - cast and crew info

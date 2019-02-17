@@ -26,6 +26,7 @@ class DataManager {
             setCastList(with: details.credits.cast)
             setProductionCompanyList(with: details.productionCompanies)
             setMpaaRating(with: details.releaseDates.results)
+            setMovieLength(with: details)
         }
     }
     
@@ -50,6 +51,14 @@ extension DataManager {
     private func setProductionCompanyList(with list: [ProductionCompany]) {
         // Stringify production companies
         DataManager.shared.selectedMovie?.productionCompanies = list.map { $0.name }.joined(separator: ", ")
+    }
+    
+    private func setMovieLength(with details: MovieDetails) {
+        var length = "TBA"
+        if let runtime = details.runtime {
+            length = String(describing: runtime) + " min"
+        }
+        DataManager.shared.selectedMovie?.length = length
     }
     
     private func setMpaaRating(with details: [Certification]) {

@@ -52,4 +52,5 @@ struct Movie: Decodable, Equatable {
     var directors: String?
     var productionCompanies: String?
     var mpaaRating: String?
+    var length: String?
 }
