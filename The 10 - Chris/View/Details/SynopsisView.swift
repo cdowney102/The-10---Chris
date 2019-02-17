@@ -35,7 +35,11 @@ class SynopsisView: UIView {
 
 extension SynopsisView {
     func setViewData(for movie: Movie) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.setLocalizedDateFormatFromTemplate("MM-dd--yyyy")
+        let date = dateFormatter.date(from: movie.releaseDate)
+        print(date)
         movieTitleLabel.text = movie.title
-//        movieRatingLabel.text = "\(String(describing: movie.mpaaRating)) | \()"
+        movieRatingLabel.text = "\(String(describing: movie.mpaaRating)) | \(String(describing: movie.length)) | \(movie.releaseDate)"
     }
 }

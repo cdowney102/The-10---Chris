@@ -13,7 +13,10 @@ class DetailsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print(DataManager.shared.selectedMovie?.cast?.count)
+        let movie = DataManager.shared.selectedMovie!
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
     }
     
     // MARK - free up selected movie

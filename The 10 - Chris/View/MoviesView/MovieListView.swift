@@ -77,7 +77,9 @@ extension MovieListView {
 // MARK - collectionView cell styling
 extension MovieListView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width / 2 - 10, height: collectionView.frame.height / 2.3)
+        let width = collectionView.frame.width / 2 - 10
+        // aspect ratio of image -- 1.4
+        return CGSize(width: width, height: width * 1.4 + 30)
     }
     
     // MARK - horizontal spacing - dont forget to subtract offset in sizeForItemAt if changed
@@ -87,7 +89,7 @@ extension MovieListView: UICollectionViewDelegateFlowLayout {
     
     // MARK - vertical spacing
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 30
+        return 15
     }
 }
 
