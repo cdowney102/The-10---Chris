@@ -9,14 +9,21 @@
 import UIKit
 
 class DetailsController: UIViewController {
+    
+    var movie: Movie!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let movie = DataManager.shared.selectedMovie!
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
+        if let movie = DataManager.shared.selectedMovie {
+            self.movie = movie
+        }
+        
+        let details = DetailsView(frame: view.frame)
+        view.addSubview(details)
+        
+        details.backdrop.downloadImage(imageType: ImageType.backdrop, path: movie.backdropPath ?? "")
+        
     }
     
     // MARK - free up selected movie

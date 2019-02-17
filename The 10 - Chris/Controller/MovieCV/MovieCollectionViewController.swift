@@ -60,7 +60,6 @@ extension MovieCollectionViewController: MovieSelectionDelegate {
     private func segue() {
         DispatchQueue.main.async {
             let nextVC = DetailsController()
-            nextVC.view.backgroundColor = .purple
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }

@@ -18,4 +18,5 @@ extension UIColor {
     static let searchLabel = UIColor(red: 94/255, green: 98/255, blue: 110/255, alpha: 1)
     static let buttonHighlighted = UIColor(red: 39/255, green: 180/255, blue: 122/255, alpha: 1)
     static let movieTitle = UIColor.white
+    static let detailsRed = UIColor(red: 142/255, green: 30/255, blue: 46/255, alpha: 1)
 }
