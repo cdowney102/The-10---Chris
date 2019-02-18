@@ -13,6 +13,9 @@ class DetailsView: UIView {
     
     let synopsisView = SynopsisView(frame: .zero)
     
+    //track cell index for array slicing for castcell
+    var slice = 0
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
    
@@ -125,7 +128,13 @@ extension DetailsView: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: CastCell.identifier, for: indexPath) as! CastCell
-            cell.setCellData(for: movie)
+//            slice += 3
+            print(indexPath.row)
+//            cell.castImageOne.downloadImage(imageType: ImageType.castImage, path: <#T##String#>)
+            #warning("fix bang operator")
+//            if slice <= (DataManager.shared.selectedMovie?.cast?.count)! {
+////                cell.setCellData(for: movie, slice: slice)
+//            }
             return cell
         }
     }

@@ -22,16 +22,6 @@ class CastCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-//    #warning("add this as cell header...?")
-//    var castTitleLabel: UILabel = {
-//        let label = UILabel(frame: .zero)
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.textAlignment = .left
-//        label.font = UIFont.synopsisLabel
-//        label.textColor = UIColor.detailsPageText
-//        label.text = "CAST"
-//        return label
-//    }()
     
     var castImageOne: UIImageView = {
         let imageView = UIImageView(frame: .zero)
@@ -68,24 +58,28 @@ class CastCell: UITableViewCell {
 
 // MARK - set cell data method
 extension CastCell {
-    func setCellData(for movie: Movie) {
-        // DL images -- array of url paths -- have extension on image view to DL images
-        let castImages = movie.cast
+    func setCellData(for movie: Movie, slice: Int) {
+
+        var index = slice
+        // DL images -- figure out slicing for cell
+//        print(movie.cast?.count)
+//        print(String(describing: index - 3), index)
+        if index >= movie.cast?.count ?? 0 { index = index - 1}
+//        print(index)
+        let castImages = movie.cast?[index - 3...index - 1]
+
+        for path in castImages! {
+            print(path.profilePath)
+        }
+        print(castImages?.count)
+        castImageOne.downloadImage(imageType: ImageType.castImage, path: castImages?[0].profilePath ?? "")
+//        castImageTwo.downloadImage(imageType: ImageType.castImage, path: castImages?[1].profilePath ?? "")
+//        castImageThree.downloadImage(imageType: ImageType.castImage, path: castImages?[2].profilePath ?? "")
     }
 }
 
 // MARK - autolayout code
 extension CastCell {
-//    private func setupCastLabel() {
-//        addSubview(castTitleLabel)
-//        NSLayoutConstraint.activate([
-//            castTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
-//            castTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),
-//            castTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
-//            castTitleLabel.heightAnchor.constraint(equalToConstant: 15)
-//            ])
-//    }
-    
     private func setupCastImages() {
         let imageSize: CGFloat = 65
         contentView.addSubview(castImageTwo)
