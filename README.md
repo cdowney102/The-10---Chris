@@ -11,4 +11,5 @@ SCREENSHOTS:
 TO-DO: 
  - [ ] Refactor CastCell's setupCell method
  - [ ] Details screen background color should adapt to dominant color of movie backdrop image
+ - [ ] Make details screen scroll animations - synopsisView/ backdrop should slide up when tableView is scrolled up and then slide back down on scroll down
  - [ ] Ensure Now Playing & Coming Soon collections are unique (API returns overlap sometimes for brand new movies)
