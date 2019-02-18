@@ -10,3 +10,5 @@ SCREENSHOTS:
 
 TO-DO: 
  - [ ] Refactor CastCell's setupCell method
+ - [ ] Details screen background color should adapt to dominant color of movie backdrop image
+ - [ ] Ensure Now Playing & Coming Soon collections are unique (API returns overlap sometimes for brand new movies)
