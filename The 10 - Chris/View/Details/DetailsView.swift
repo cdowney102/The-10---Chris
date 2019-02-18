@@ -141,10 +141,13 @@ extension DetailsView: UITableViewDelegate, UITableViewDataSource {
         guard let movie = DataManager.shared.selectedMovie else { return UITableViewCell() }
         
         if indexPath.section == 0 {
+            // director/ company cell
             let cell = tableView.dequeueReusableCell(withIdentifier: DirectorCell.identifier, for: indexPath) as! DirectorCell
             cell.setCellData(for: movie)
             return cell
+            
         } else {
+            // cast cell
             let cell = tableView.dequeueReusableCell(withIdentifier: CastCell.identifier, for: indexPath) as! CastCell
        
             let profilePaths = movie.cast
