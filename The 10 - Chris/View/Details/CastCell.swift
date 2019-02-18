@@ -21,16 +21,16 @@ class CastCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    #warning("add this as cell header...?")
-    var castTitleLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .left
-        label.font = UIFont.synopsisLabel
-        label.textColor = UIColor.detailsPageText
-        label.text = "CAST"
-        return label
-    }()
+//    #warning("add this as cell header...?")
+//    var castTitleLabel: UILabel = {
+//        let label = UILabel(frame: .zero)
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.textAlignment = .left
+//        label.font = UIFont.synopsisLabel
+//        label.textColor = UIColor.detailsPageText
+//        label.text = "CAST"
+//        return label
+//    }()
     
     var castImageOne: UIImageView = {
         let imageView = UIImageView(frame: .zero)
@@ -57,7 +57,8 @@ class CastCell: UITableViewCell {
     }()
     
     private func configure() {
-        setupCastLabel()
+        backgroundColor = UIColor.detailsRed
+        setupCastImages()
     }
 }
 
@@ -71,15 +72,15 @@ extension CastCell {
 
 // MARK - autolayout code
 extension CastCell {
-    private func setupCastLabel() {
-        addSubview(castTitleLabel)
-        NSLayoutConstraint.activate([
-            castTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
-            castTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),
-            castTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
-            castTitleLabel.heightAnchor.constraint(equalToConstant: 15)
-            ])
-    }
+//    private func setupCastLabel() {
+//        addSubview(castTitleLabel)
+//        NSLayoutConstraint.activate([
+//            castTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
+//            castTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),
+//            castTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
+//            castTitleLabel.heightAnchor.constraint(equalToConstant: 15)
+//            ])
+//    }
     
     private func setupCastImages() {
         addSubview(castImageTwo)

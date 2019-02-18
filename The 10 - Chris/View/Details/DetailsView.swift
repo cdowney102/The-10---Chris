@@ -36,6 +36,8 @@ class DetailsView: UIView {
         tableView.backgroundColor = UIColor.detailsRed
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(DirectorCell.self, forCellReuseIdentifier: DirectorCell.identifier)
+        tableView.register(CastCell.self, forCellReuseIdentifier: CastCell.identifier)
+        tableView.register(CastSectionHeader.self, forHeaderFooterViewReuseIdentifier: CastSectionHeader.identifier)
         tableView.delegate = self
         tableView.dataSource = self
         return tableView
@@ -94,8 +96,19 @@ extension DetailsView {
 
 // MARK - tableview delegate methods
 extension DetailsView: UITableViewDelegate, UITableViewDataSource {
+
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        if section == 1 {
+//            guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: CastSectionHeader.identifier) as? CastSectionHeader else {
+//                return nil
+//            }
+//            return header
+//        }
+//        return nil
+//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         guard let movie = DataManager.shared.selectedMovie else { return UITableViewCell() }
         
         if indexPath.row == 0 {
@@ -110,14 +123,22 @@ extension DetailsView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 55
+        if indexPath.row == 0 {
+            return 50
+        } else {
+            return 75
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        if section == 0 {
+            return 1
+        } else {
+            return DataManager.shared.selectedMovie?.cast?.count ?? 0
+        }
     }
 }

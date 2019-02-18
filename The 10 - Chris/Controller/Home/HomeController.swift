@@ -18,6 +18,8 @@ class HomeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        checkNetworkConnection()
+        
         view.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Home Background"))
         navigationController?.setNavigationBarHidden(true, animated: false)
         
@@ -161,6 +163,15 @@ extension HomeController {
     private func toNowPlaying() {
         pageController.setViewControllers([self.nowPlayingController], direction: .forward, animated: false) { (_) in
             self.header.highlightNowPlaying()
+        }
+    }
+}
+
+// MARK - check network connection
+extension HomeController {
+    private func checkNetworkConnection() {
+        if !ConnectionManager.shared.isReachable(reachability: ConnectionManager.reachable!) {
+            self.showNetworkAlert()
         }
     }
 }
