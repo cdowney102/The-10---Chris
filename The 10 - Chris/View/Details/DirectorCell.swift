@@ -15,6 +15,7 @@ class DirectorCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        self.selectionStyle = .none
         configure()
     }
     
@@ -25,6 +26,8 @@ class DirectorCell: UITableViewCell {
     var directorsTitleLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 1
+        label.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 1000), for: .vertical)
         label.textAlignment = .left
         label.font = UIFont.directorCellTitle
         label.textColor = UIColor.detailsPageText
@@ -38,7 +41,8 @@ class DirectorCell: UITableViewCell {
         label.textAlignment = .left
         label.font = UIFont.detailsTextView
         label.textColor = UIColor.detailsPageText
-        label.numberOfLines = 2
+        label.numberOfLines = 0
+        label.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 1000), for: .vertical)
         label.lineBreakMode = .byWordWrapping
         label.text = "Chris"
         return label
@@ -48,6 +52,8 @@ class DirectorCell: UITableViewCell {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
+        label.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 1000), for: .vertical)
+        label.numberOfLines = 1
         label.font = UIFont.directorCellTitle
         label.textColor = UIColor.detailsPageText
         label.text = "Production Companies:"
@@ -58,9 +64,10 @@ class DirectorCell: UITableViewCell {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
+        label.numberOfLines = 0
         label.font = UIFont.detailsTextView
+        label.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 1000), for: .vertical)
         label.textColor = UIColor.detailsPageText
-        label.numberOfLines = 2
         label.lineBreakMode = .byWordWrapping
         label.text = "Chris"
         return label
@@ -84,38 +91,35 @@ extension DirectorCell {
 // MARK - autolayout code
 extension DirectorCell {
     private func setupDirectors() {
-        addSubview(directorsTitleLabel)
+        contentView.addSubview(directorsTitleLabel)
         NSLayoutConstraint.activate([
-            directorsTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
-            directorsTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),
-            directorsTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
-            directorsTitleLabel.heightAnchor.constraint(equalToConstant: 15)
-            ])
+            directorsTitleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
+            directorsTitleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5),
+            directorsTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
+           ])
         
-        addSubview(directorsNameLabel)
+        contentView.addSubview(directorsNameLabel)
         NSLayoutConstraint.activate([
-            directorsNameLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
-            directorsNameLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),
+            directorsNameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
+            directorsNameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5),
             directorsNameLabel.topAnchor.constraint(equalTo: directorsTitleLabel.bottomAnchor, constant: -5),
-            directorsNameLabel.heightAnchor.constraint(equalToConstant: 35)
             ])
     }
     
     private func setupCompanies() {
-        addSubview(companyTitleLabel)
+        contentView.addSubview(companyTitleLabel)
         NSLayoutConstraint.activate([
-            companyTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
-            companyTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),
+            companyTitleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
+            companyTitleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5),
             companyTitleLabel.topAnchor.constraint(equalTo: directorsNameLabel.bottomAnchor, constant: 10),
-            companyTitleLabel.heightAnchor.constraint(equalToConstant: 15)
             ])
         
-        addSubview(companyNameLabel)
+        contentView.addSubview(companyNameLabel)
         NSLayoutConstraint.activate([
-            companyNameLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
-            companyNameLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),
+            companyNameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
+            companyNameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5),
             companyNameLabel.topAnchor.constraint(equalTo: companyTitleLabel.bottomAnchor, constant: 1),
-            companyNameLabel.heightAnchor.constraint(equalToConstant: 35)
+            companyNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
             ])
     }
 }

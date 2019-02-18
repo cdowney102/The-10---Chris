@@ -21,7 +21,7 @@ class DataManager {
     }
     
     func setSelectedMovieDetails(with details: MovieDetails) {
-        if let _ = DataManager.shared.selectedMovie {
+        if DataManager.shared.selectedMovie != nil {
             setDirectorList(with: details.credits.crew)
             setCastList(with: details.credits.cast)
             setProductionCompanyList(with: details.productionCompanies)

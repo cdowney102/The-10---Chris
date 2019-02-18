@@ -38,8 +38,10 @@ class DetailsView: UIView {
         tableView.register(DirectorCell.self, forCellReuseIdentifier: DirectorCell.identifier)
         tableView.register(CastCell.self, forCellReuseIdentifier: CastCell.identifier)
         tableView.register(CastSectionHeader.self, forHeaderFooterViewReuseIdentifier: CastSectionHeader.identifier)
+        tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = UITableView.automaticDimension
         return tableView
     }()
     
@@ -97,21 +99,26 @@ extension DetailsView {
 // MARK - tableview delegate methods
 extension DetailsView: UITableViewDelegate, UITableViewDataSource {
 
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        if section == 1 {
-//            guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: CastSectionHeader.identifier) as? CastSectionHeader else {
-//                return nil
-//            }
-//            return header
-//        }
-//        return nil
-//    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 1 {
+            guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: CastSectionHeader.identifier) as? CastSectionHeader else {
+                return nil
+            }
+            return header
+        }
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 { return 0 }
+        return 25
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let movie = DataManager.shared.selectedMovie else { return UITableViewCell() }
         
-        if indexPath.row == 0 {
+        if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: DirectorCell.identifier, for: indexPath) as! DirectorCell
             cell.setCellData(for: movie)
             return cell
@@ -122,12 +129,8 @@ extension DetailsView: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return 50
-        } else {
-            return 75
-        }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

@@ -12,7 +12,7 @@ import UIKit
 class MoviesDataSource: NSObject {
     // array for filtering movies during search
     var foundMovies: [Movie]?
-    // reference to CV in screen
+    // reference to CV -- to differentiate the DS/ CV
     weak var collectionView: UICollectionView?
     
     var movies = [Movie]() {

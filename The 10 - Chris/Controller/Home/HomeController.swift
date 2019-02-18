@@ -4,7 +4,6 @@
 //
 //  Created by christopher downey on 2/12/19.
 //  Copyright © 2019 christopher downey. All rights reserved.
-//
 
 import UIKit
 // contains page view controller
@@ -62,7 +61,7 @@ class HomeController: UIViewController {
         
         APIManager.shared.fetchList(ListType.genres) { (list: GenreList?, error: Error?) in
             if let error = error {
-                print(error)
+                self.showAlert(title: APIError.title, msg: error.localizedDescription)
             } else {
                 DispatchQueue.main.async {
                     if let list = list {
@@ -74,7 +73,7 @@ class HomeController: UIViewController {
         
         APIManager.shared.fetchList(ListType.nowPlaying) { (list: MovieList?, error: Error?) in
             if let error = error {
-                print(error)
+                self.showAlert(title: APIError.title, msg: error.localizedDescription)
             } else {
                 DispatchQueue.main.async {
                     if let list = list {
@@ -153,7 +152,10 @@ extension HomeController {
             strongSelf.toNowPlaying()
         }
     }
-    
+}
+
+// MARK - segue stuff
+extension HomeController {
     private func toComingSoon() {
         pageController.setViewControllers([self.comingSoonController], direction: .forward, animated: false) { (_) in
             self.header.highlightComingSoon()
@@ -171,7 +173,7 @@ extension HomeController {
 extension HomeController {
     private func checkNetworkConnection() {
         if !ConnectionManager.shared.isReachable(reachability: ConnectionManager.reachable!) {
-            self.showNetworkAlert()
+            self.showAlert(title: NetworkConnectionError.title, msg: NetworkConnectionError.networkConnection.rawValue)
         }
     }
 }

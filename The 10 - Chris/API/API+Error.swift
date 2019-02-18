@@ -9,7 +9,20 @@
 import UIKit
 
 enum APIError: Error {
+    static let title = "Sorry!"
+    
     case server
     case invalidRequest
     case badURL
+    
+    var description: String {
+        switch (self) {
+        case .server:
+            return "It's not you, it's us..."
+        case .invalidRequest:
+            return "Invalid Request"
+        default:
+            return "Bad URL"
+        }
+    }
 }

@@ -26,16 +26,22 @@ class MovieCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        movieListView = MovieListView(frame: self.view.bounds)
-        movieListView.selectionDelegate = self
-        view.addSubview(self.movieListView)
-        movieListView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        movieListView.dataSource = self.dataSource
-        dataSource.collectionView = self.movieListView?.movieCollectionView
+        configure()
     }
     
     func reloadData() {
         movieListView?.movieCollectionView.reloadData()
+    }
+    
+    private func configure() {
+        movieListView = MovieListView(frame: self.view.bounds)
+        movieListView.selectionDelegate = self
+        
+        view.addSubview(self.movieListView)
+        movieListView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        // set data source & CV for reference
+        movieListView.dataSource = self.dataSource
+        dataSource.collectionView = self.movieListView?.movieCollectionView
     }
 }
 
@@ -48,7 +54,7 @@ extension MovieCollectionViewController: MovieSelectionDelegate {
         
         APIManager.shared.fetchMovieDetails(movieId: movie.id) { [ weak self ] (details: MovieDetails?, error) in
             if let error = error {
-                print(error)
+                self?.showAlert(title: APIError.title, msg: error.localizedDescription)
             } else {
                 // set detailed info for movie now with query results
                 DataManager.shared.setSelectedMovieDetails(with: details!)

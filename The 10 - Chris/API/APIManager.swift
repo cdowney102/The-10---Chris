@@ -33,7 +33,13 @@ class APIManager {
         
         let base = APIManager.baseURL.appendingPathComponent(listType.rawValue)
         var urlComponents = URLComponents(url: base, resolvingAgainstBaseURL: true)
-        urlComponents?.queryItems = [URLQueryItem(name: "api_key", value: apiKey), URLQueryItem(name: "language", value: "en-US"), URLQueryItem(name: "page", value: "1"), URLQueryItem(name: "region", value: "US")]
+        urlComponents?.queryItems = [
+            URLQueryItem(name: "api_key", value: apiKey),
+            URLQueryItem(name: "language", value: "en-US"),
+            URLQueryItem(name: "page", value: "1"),
+            URLQueryItem(name: "region", value: "US")
+            ]
+        
         guard let url = urlComponents?.url else {
             completionHandler(nil, APIError.badURL)
             return
@@ -81,6 +87,24 @@ class APIManager {
     func fetchMovieDetails(movieId: Int, completionHandler: @escaping (MovieDetails?, Error?) -> ()) {
         // this path gets all info about a movie and its actors/ directors etc
         // https://api.themoviedb.org/3/movie/6547?api_key=d52f2a679c2747d1798778bf535c1989&language=en-US&append_to_response=credits
+        
+//        let baseUrlPath = "https://api.themoviedb.org/3/"
+        
+//        let baser = APIManager.baseURL.appendingPathComponent("movie/")
+//        var urlComponentsr = URLComponents(url: baser, resolvingAgainstBaseURL: true)
+//        urlComponentsr?.queryItems = [
+//                URLQueryItem(name: "", value: String(describing: movieId)),
+//                URLQueryItem(name: "language", value: "en-US"),
+//                URLQueryItem(name: "page", value: "1"),
+//                URLQueryItem(name: "region", value: "US")
+//                ]
+//        guard let url = urlComponents?.url else {
+//            completionHandler(nil, APIError.badURL)
+//            return
+//        }
+//        let request = URLRequest(url: url)
+        
+        
 
         let base = baseUrlPath + "movie/\(movieId)?api_key=\(apiKey)&language=en-US&append_to_response=credits,release_dates"
 //        print(base)

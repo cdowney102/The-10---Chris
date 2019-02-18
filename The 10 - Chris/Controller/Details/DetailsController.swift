@@ -14,7 +14,17 @@ class DetailsController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        configure()
+    }
+    
+    // MARK - free up selected movie
+    override func viewWillDisappear(_ animated: Bool) {
+        DataManager.shared.clearSelectedMovie()
+    }
+    
+    private func configure() {
+        
         if let movie = DataManager.shared.selectedMovie {
             self.movie = movie
         }
@@ -24,11 +34,5 @@ class DetailsController: UIViewController {
         
         details.backdrop.downloadImage(imageType: ImageType.backdrop, path: movie.backdropPath ?? "")
         details.setViewData(for: movie)
-        
-    }
-    
-    // MARK - free up selected movie
-    override func viewWillDisappear(_ animated: Bool) {
-        DataManager.shared.clearSelectedMovie()
     }
 }

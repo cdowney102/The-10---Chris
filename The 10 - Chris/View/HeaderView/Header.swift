@@ -99,7 +99,6 @@ extension Header {
             ])
     }
 
-    #warning("handle network connectivity!!! his edge cases -- error handling -- screen sizes -- good error handling and notifications for it")
     private func setupMenuButtons() {
         addSubview(nowPlayingButton)
         NSLayoutConstraint.activate([

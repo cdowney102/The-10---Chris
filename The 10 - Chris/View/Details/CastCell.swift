@@ -15,6 +15,7 @@ class CastCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        self.selectionStyle = .none
         configure()
     }
     
@@ -36,7 +37,8 @@ class CastCell: UITableViewCell {
         let imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = #imageLiteral(resourceName: "aqua")
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
         return imageView
     }()
     
@@ -44,7 +46,8 @@ class CastCell: UITableViewCell {
         let imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = #imageLiteral(resourceName: "aqua")
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
         return imageView
     }()
     
@@ -52,7 +55,8 @@ class CastCell: UITableViewCell {
         let imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = #imageLiteral(resourceName: "aqua")
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
         return imageView
     }()
     
@@ -83,33 +87,35 @@ extension CastCell {
 //    }
     
     private func setupCastImages() {
-        addSubview(castImageTwo)
+        let imageSize: CGFloat = 70
+        contentView.addSubview(castImageTwo)
         NSLayoutConstraint.activate([
-            castImageTwo.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            castImageTwo.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            castImageTwo.heightAnchor.constraint(equalToConstant: 40),
-            castImageTwo.widthAnchor.constraint(equalToConstant: 40)
+            castImageTwo.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10),
+            castImageTwo.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -10),
+            castImageTwo.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
+            castImageTwo.heightAnchor.constraint(equalToConstant: imageSize),
+            castImageTwo.widthAnchor.constraint(equalToConstant: imageSize)
             ])
         
-        addSubview(castImageOne)
+        contentView.addSubview(castImageOne)
         NSLayoutConstraint.activate([
             castImageOne.centerYAnchor.constraint(equalTo: castImageTwo.centerYAnchor),
-            castImageOne.heightAnchor.constraint(equalToConstant: 40),
-            castImageOne.widthAnchor.constraint(equalToConstant: 40),
-            castImageOne.rightAnchor.constraint(equalTo: castImageTwo.leftAnchor, constant: -15)
+            castImageOne.heightAnchor.constraint(equalToConstant: imageSize),
+            castImageOne.widthAnchor.constraint(equalToConstant: imageSize),
+            castImageOne.rightAnchor.constraint(equalTo: castImageTwo.leftAnchor, constant: -25)
             ])
         
-        addSubview(castImageThree)
+        contentView.addSubview(castImageThree)
         NSLayoutConstraint.activate([
             castImageThree.centerYAnchor.constraint(equalTo: castImageTwo.centerYAnchor),
-            castImageThree.heightAnchor.constraint(equalToConstant: 40),
-            castImageThree.widthAnchor.constraint(equalToConstant: 40),
-            castImageThree.rightAnchor.constraint(equalTo: castImageTwo.rightAnchor, constant: 15)
+            castImageThree.heightAnchor.constraint(equalToConstant: imageSize),
+            castImageThree.widthAnchor.constraint(equalToConstant: imageSize),
+            castImageThree.leftAnchor.constraint(equalTo: castImageTwo.rightAnchor, constant: 25)
             ])
         
-        castImageOne.layer.cornerRadius = 40 / 2
-        castImageTwo.layer.cornerRadius = 40 / 2
-        castImageThree.layer.cornerRadius = 40 / 2
+        castImageOne.layer.cornerRadius = imageSize / 2
+        castImageTwo.layer.cornerRadius = imageSize / 2
+        castImageThree.layer.cornerRadius = imageSize / 2
     }
 }
 

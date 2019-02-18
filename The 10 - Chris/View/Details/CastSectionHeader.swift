@@ -5,6 +5,7 @@
 //  Created by christopher downey on 2/17/19.
 //  Copyright © 2019 christopher downey. All rights reserved.
 //
+// custom header for second section [ CAST ]
 
 import UIKit
 
@@ -34,15 +35,18 @@ class CastSectionHeader: UITableViewHeaderFooterView {
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = UIColor.detailsRed
+        title.backgroundColor = .clear
+        // workaround to set BG color
+        backgroundView = UIView(frame: .zero)
+        backgroundView?.backgroundColor = .clear
         addTitle()
     }
     
     private func addTitle() {
-        addSubview(title)
+        contentView.addSubview(title)
         NSLayoutConstraint.activate([
-            title.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            title.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10)
+            title.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            title.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10)
             ])
     }
 }
