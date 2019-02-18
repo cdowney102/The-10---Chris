@@ -153,9 +153,15 @@ extension DetailsView: UITableViewDelegate, UITableViewDataSource {
             let profilePaths = movie.cast
             
             if let count = profilePaths?.count, count >= 3 {
+                // MARK - set images
                 cell.castImageOne.downloadImage(imageType: ImageType.castImage, path: profilePaths?[indexPath.row].profilePath ?? "")
                 cell.castImageTwo.downloadImage(imageType: ImageType.castImage, path: profilePaths?[indexPath.row + 1].profilePath ?? "")
                 cell.castImageThree.downloadImage(imageType: ImageType.castImage, path: profilePaths?[indexPath.row + 2].profilePath ?? "")
+                
+                // MARK - set names
+                cell.castOneLabel.text = profilePaths?[indexPath.row].name
+                cell.castTwoLabel.text = profilePaths?[indexPath.row + 1].name
+                cell.castThreeLabel.text = profilePaths?[indexPath.row + 2].name
             }
             return cell
         }

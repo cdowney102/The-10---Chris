@@ -41,6 +41,42 @@ class CastCell: UITableViewCell {
         return imageView
     }()
     
+    var castOneLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.font = UIFont.cellTitle
+        label.textColor = UIColor.detailsPageText
+        label.text = "Robert Downey Jr."
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 3
+        return label
+    }()
+    
+    var castTwoLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.font = UIFont.cellTitle
+        label.textColor = UIColor.detailsPageText
+        label.text = "Robert Downey Jr."
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 3
+        return label
+    }()
+    
+    var castThreeLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.font = UIFont.cellTitle
+        label.textColor = UIColor.detailsPageText
+        label.text = "Robert Downey Jr."
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 3
+        return label
+    }()
+    
     var castImageThree: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -53,11 +89,35 @@ class CastCell: UITableViewCell {
     private func configure() {
         backgroundColor = UIColor.detailsRed
         setupCastImages()
+        setupCastLabels()
     }
 }
 
 // MARK - autolayout code
 extension CastCell {
+    private func setupCastLabels() {
+        addSubview(castOneLabel)
+        NSLayoutConstraint.activate([
+            castOneLabel.leftAnchor.constraint(equalTo: castImageOne.leftAnchor, constant: -3),
+            castOneLabel.rightAnchor.constraint(equalTo: castImageOne.rightAnchor, constant: 3),
+            castOneLabel.topAnchor.constraint(equalTo: castImageOne.bottomAnchor, constant: 3)
+            ])
+        
+        addSubview(castTwoLabel)
+        NSLayoutConstraint.activate([
+            castTwoLabel.leftAnchor.constraint(equalTo: castImageTwo.leftAnchor, constant: -3),
+            castTwoLabel.rightAnchor.constraint(equalTo: castImageTwo.rightAnchor, constant: 3),
+            castTwoLabel.topAnchor.constraint(equalTo: castImageTwo.bottomAnchor, constant: 3)
+            ])
+        
+        addSubview(castThreeLabel)
+        NSLayoutConstraint.activate([
+            castThreeLabel.leftAnchor.constraint(equalTo: castImageThree.leftAnchor, constant: -3),
+            castThreeLabel.rightAnchor.constraint(equalTo: castImageThree.rightAnchor, constant: 3),
+            castThreeLabel.topAnchor.constraint(equalTo: castImageThree.bottomAnchor, constant: 3)
+            ])
+    }
+    
     private func setupCastImages() {
         let imageSize: CGFloat = 65
         contentView.addSubview(castImageTwo)
