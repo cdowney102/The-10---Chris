@@ -11,6 +11,8 @@ import UIKit
 
 class DetailsView: UIView {
     
+    var xBtnAction: (() -> Void)?
+
     let synopsisView = SynopsisView(frame: .zero)
 
     override init(frame: CGRect) {
@@ -46,9 +48,18 @@ class DetailsView: UIView {
         return tableView
     }()
     
+    var xButton: UIButton = {
+        let button = UIButton(frame: .zero)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(#imageLiteral(resourceName: "xwhite"), for: .normal)
+        button.addTarget(self, action: #selector(xTapped), for: .touchUpInside)
+        return button
+    }()
+        
     private func configure() {
         backgroundColor = UIColor.detailsRed
         setupBackdrop()
+        setupButton()
         setupSynopsis()
         setupTableView()
     }
@@ -56,6 +67,16 @@ class DetailsView: UIView {
 
 // MARK - autolayout code
 extension DetailsView {
+    private func setupButton() {
+        addSubview(xButton)
+        NSLayoutConstraint.activate([
+            xButton.widthAnchor.constraint(equalToConstant: 20),
+            xButton.heightAnchor.constraint(equalToConstant: 20),
+            xButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),
+            xButton.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 22)
+            ])
+    }
+    
     private func setupBackdrop() {
         addSubview(backdrop)
         NSLayoutConstraint.activate([
@@ -151,5 +172,12 @@ extension DetailsView: UITableViewDelegate, UITableViewDataSource {
         } else {
             return 1 // DataManager.shared.selectedMovie?.cast?.count ?? 0
         }
+    }
+}
+
+// MARK - xbutton close action
+extension DetailsView {
+    @objc private func xTapped() {
+        xBtnAction?()
     }
 }

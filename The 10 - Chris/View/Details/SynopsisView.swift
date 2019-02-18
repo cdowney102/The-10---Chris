@@ -116,7 +116,7 @@ extension SynopsisView {
         addSubview(movieTitleLabel)
         NSLayoutConstraint.activate([
             movieTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
-            movieTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -25),
+            movieTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15),
             movieTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
             movieTitleLabel.heightAnchor.constraint(equalToConstant: 60)
             ])
@@ -205,3 +205,5 @@ extension SynopsisView {
         return "TBD"
     }
 }
+
+
