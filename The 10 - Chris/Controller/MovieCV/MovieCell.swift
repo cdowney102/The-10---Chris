@@ -65,8 +65,6 @@ class MovieCell: UICollectionViewCell {
     }()
     
     private func configure() {
-//        self.layer.borderColor = UIColor.yellow.cgColor
-//        self.layer.borderWidth = 1
         backgroundColor = UIColor.clear
         setupRating()
         setupTitle()

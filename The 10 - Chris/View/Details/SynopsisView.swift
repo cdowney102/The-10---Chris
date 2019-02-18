@@ -67,15 +67,7 @@ class SynopsisView: UIView {
         label.text = "Synopsis"
         return label
     }()
-    
-    var backgroundImage: UIImageView = {
-        let imageView = UIImageView(frame: .zero)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = #imageLiteral(resourceName: "synopsisbox")
-        imageView.contentMode = .scaleAspectFill
-        return imageView
-    }()
-    
+
     var starImage: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -103,7 +95,6 @@ class SynopsisView: UIView {
         tv.showsVerticalScrollIndicator = false
         tv.backgroundColor = .clear
         tv.isSelectable = false
-//        tv.textContainerInset = UIEdgeInsets(top: 3, left: 0, bottom: 0, right: 0)
         return tv
     }()
     
@@ -122,16 +113,6 @@ class SynopsisView: UIView {
 
 // MARK - auto layout code
 extension SynopsisView {
-    private func setupBackground() {
-//        addSubview(backgroundImage)
-//        NSLayoutConstraint.activate([
-//            backgroundImage.leftAnchor.constraint(equalTo: self.leftAnchor),
-//            backgroundImage.topAnchor.constraint(equalTo: self.topAnchor),
-//            backgroundImage.rightAnchor.constraint(equalTo: self.rightAnchor),
-//            backgroundImage.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-//            ])
-    }
-    
     private func setupTitle() {
         addSubview(movieTitleLabel)
         NSLayoutConstraint.activate([
