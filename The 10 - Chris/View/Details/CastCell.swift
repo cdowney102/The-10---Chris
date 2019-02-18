@@ -87,7 +87,7 @@ extension CastCell {
 //    }
     
     private func setupCastImages() {
-        let imageSize: CGFloat = 70
+        let imageSize: CGFloat = 65
         contentView.addSubview(castImageTwo)
         NSLayoutConstraint.activate([
             castImageTwo.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10),
@@ -102,7 +102,7 @@ extension CastCell {
             castImageOne.centerYAnchor.constraint(equalTo: castImageTwo.centerYAnchor),
             castImageOne.heightAnchor.constraint(equalToConstant: imageSize),
             castImageOne.widthAnchor.constraint(equalToConstant: imageSize),
-            castImageOne.rightAnchor.constraint(equalTo: castImageTwo.leftAnchor, constant: -25)
+            castImageOne.rightAnchor.constraint(equalTo: castImageTwo.leftAnchor, constant: -30)
             ])
         
         contentView.addSubview(castImageThree)
@@ -110,7 +110,7 @@ extension CastCell {
             castImageThree.centerYAnchor.constraint(equalTo: castImageTwo.centerYAnchor),
             castImageThree.heightAnchor.constraint(equalToConstant: imageSize),
             castImageThree.widthAnchor.constraint(equalToConstant: imageSize),
-            castImageThree.leftAnchor.constraint(equalTo: castImageTwo.rightAnchor, constant: 25)
+            castImageThree.leftAnchor.constraint(equalTo: castImageTwo.rightAnchor, constant: 30)
             ])
         
         castImageOne.layer.cornerRadius = imageSize / 2

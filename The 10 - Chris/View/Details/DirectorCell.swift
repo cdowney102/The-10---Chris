@@ -102,7 +102,7 @@ extension DirectorCell {
         NSLayoutConstraint.activate([
             directorsNameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
             directorsNameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5),
-            directorsNameLabel.topAnchor.constraint(equalTo: directorsTitleLabel.bottomAnchor, constant: -5),
+            directorsNameLabel.topAnchor.constraint(equalTo: directorsTitleLabel.bottomAnchor, constant: 1),
             ])
     }
     

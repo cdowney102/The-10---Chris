@@ -32,7 +32,7 @@ class DetailsView: UIView {
     }()
     
     lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero)
+        let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.backgroundColor = UIColor.detailsRed
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(DirectorCell.self, forCellReuseIdentifier: DirectorCell.identifier)
@@ -41,6 +41,7 @@ class DetailsView: UIView {
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.showsVerticalScrollIndicator = false
         tableView.rowHeight = UITableView.automaticDimension
         return tableView
     }()
