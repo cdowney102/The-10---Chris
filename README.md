@@ -2,7 +2,7 @@
 An app that displays 10 now playing movies &amp; 10 upcoming movies
 
 SCREENSHOTS:
-![Screenshot](https://user-images.githubusercontent.com/8717712/52974621-0769a680-3377-11e9-8a07-f10f887e3a55.png)
+![Screenshot]<img src="https://user-images.githubusercontent.com/8717712/52974621-0769a680-3377-11e9-8a07-f10f887e3a55.png" alt="alt text" width="150" height="300">
 ![Screenshot](https://user-images.githubusercontent.com/8717712/52974620-0769a680-3377-11e9-9f07-0a94b8ffdc82.png)
 ![Screenshot](https://user-images.githubusercontent.com/8717712/52974618-0769a680-3377-11e9-8e9b-85924df68f1c.png)
 ![Screenshot](https://user-images.githubusercontent.com/8717712/52974617-06d11000-3377-11e9-8426-5ebef9f1ed00.png)
