@@ -27,10 +27,6 @@ extension UIView {
         
         let shadowRect: CGRect = self.bounds.insetBy(dx: 1, dy: 4)
         self.layer.shadowPath = UIBezierPath(rect: shadowRect).cgPath
-//        self.layer.shadowColor = UIColor.viewShadowColor
-//        self.layer.shadowOffset = CGSize(width: 2, height: 8)
-//        self.layer.shadowOpacity = 1
-//        self.layer.masksToBounds = false
         if let radius = cornerRadius { self.layer.cornerRadius = radius }
     }
 }

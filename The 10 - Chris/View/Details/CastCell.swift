@@ -26,7 +26,7 @@ class CastCell: UITableViewCell {
     var castImageOne: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = #imageLiteral(resourceName: "aqua")
+        imageView.image = #imageLiteral(resourceName: "no poster")
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         return imageView
@@ -35,7 +35,7 @@ class CastCell: UITableViewCell {
     var castImageTwo: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = #imageLiteral(resourceName: "aqua")
+        imageView.image = #imageLiteral(resourceName: "no poster")
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         return imageView
@@ -49,7 +49,8 @@ class CastCell: UITableViewCell {
         label.textColor = UIColor.detailsPageText
         label.text = "Robert Downey Jr."
         label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 3
+        label.numberOfLines = 0
+        label.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 1000), for: .vertical)
         return label
     }()
     
@@ -61,7 +62,8 @@ class CastCell: UITableViewCell {
         label.textColor = UIColor.detailsPageText
         label.text = "Robert Downey Jr."
         label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 3
+        label.numberOfLines = 0
+        label.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 1000), for: .vertical)
         return label
     }()
     
@@ -73,14 +75,15 @@ class CastCell: UITableViewCell {
         label.textColor = UIColor.detailsPageText
         label.text = "Robert Downey Jr."
         label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 3
+        label.numberOfLines = 0
+        label.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 1000), for: .vertical)
         return label
     }()
     
     var castImageThree: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = #imageLiteral(resourceName: "aqua")
+        imageView.image = #imageLiteral(resourceName: "no poster")
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         return imageView
@@ -93,37 +96,80 @@ class CastCell: UITableViewCell {
     }
 }
 
+// MARK - setup cell data
+extension CastCell {
+    // REFACTOR THIS ASAP AFTER WORKING
+    func setupCell(with data: [CastMember]) {
+        if data.count == 3 {
+            // dl 3
+            castImageOne.downloadImage(imageType: ImageType.castImage, path: data[0].profilePath ?? "")
+            castImageTwo.downloadImage(imageType: ImageType.castImage, path: data[1].profilePath ?? "")
+            castImageThree.downloadImage(imageType: ImageType.castImage, path: data[2].profilePath ?? "")
+            
+            castImageThree.isHidden = false
+            castImageTwo.isHidden = false
+            castOneLabel.text = data[0].name
+            castTwoLabel.text = data[1].name
+            castThreeLabel.text = data[2].name
+            
+        } else if data.count == 2 {
+            // dl first 2
+            castImageOne.downloadImage(imageType: ImageType.castImage, path: data[0].profilePath ?? "")
+            castImageTwo.downloadImage(imageType: ImageType.castImage, path: data[1].profilePath ?? "")
+            castImageThree.isHidden = true
+            castImageTwo.isHidden = false
+
+            castOneLabel.text = data[0].name
+            castTwoLabel.text = data[1].name
+            castThreeLabel.isHidden = true
+            
+        } else if data.count == 1 {
+            //dl first only
+            castImageOne.downloadImage(imageType: ImageType.castImage, path: data[0].profilePath ?? "")
+            castImageTwo.isHidden = true
+            castImageThree.isHidden = true
+            
+            castOneLabel.text = data[0].name
+            castTwoLabel.isHidden = true
+            castThreeLabel.isHidden = true
+        }
+    }
+}
+
 // MARK - autolayout code
 extension CastCell {
     private func setupCastLabels() {
-        addSubview(castOneLabel)
+        contentView.addSubview(castOneLabel)
         NSLayoutConstraint.activate([
             castOneLabel.leftAnchor.constraint(equalTo: castImageOne.leftAnchor, constant: -3),
             castOneLabel.rightAnchor.constraint(equalTo: castImageOne.rightAnchor, constant: 3),
-            castOneLabel.topAnchor.constraint(equalTo: castImageOne.bottomAnchor, constant: 3)
+            castOneLabel.topAnchor.constraint(equalTo: castImageOne.bottomAnchor, constant: 3),
+            castOneLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 5)
             ])
         
-        addSubview(castTwoLabel)
+        contentView.addSubview(castTwoLabel)
         NSLayoutConstraint.activate([
             castTwoLabel.leftAnchor.constraint(equalTo: castImageTwo.leftAnchor, constant: -3),
             castTwoLabel.rightAnchor.constraint(equalTo: castImageTwo.rightAnchor, constant: 3),
-            castTwoLabel.topAnchor.constraint(equalTo: castImageTwo.bottomAnchor, constant: 3)
+            castTwoLabel.topAnchor.constraint(equalTo: castImageTwo.bottomAnchor, constant: 3),
+            castTwoLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 5)
             ])
         
-        addSubview(castThreeLabel)
+        contentView.addSubview(castThreeLabel)
         NSLayoutConstraint.activate([
             castThreeLabel.leftAnchor.constraint(equalTo: castImageThree.leftAnchor, constant: -3),
             castThreeLabel.rightAnchor.constraint(equalTo: castImageThree.rightAnchor, constant: 3),
-            castThreeLabel.topAnchor.constraint(equalTo: castImageThree.bottomAnchor, constant: 3)
+            castThreeLabel.topAnchor.constraint(equalTo: castImageThree.bottomAnchor, constant: 3),
+            castThreeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 5)
             ])
     }
     
     private func setupCastImages() {
-        let imageSize: CGFloat = 65
+        // MARK - cast image sizing
+        let imageSize: CGFloat = 70
         contentView.addSubview(castImageTwo)
         NSLayoutConstraint.activate([
             castImageTwo.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10),
-            castImageTwo.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -10),
             castImageTwo.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
             castImageTwo.heightAnchor.constraint(equalToConstant: imageSize),
             castImageTwo.widthAnchor.constraint(equalToConstant: imageSize)

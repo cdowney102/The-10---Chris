@@ -14,6 +14,12 @@ class DetailsView: UIView {
     var xBtnAction: (() -> Void)?
 
     let synopsisView = SynopsisView(frame: .zero)
+    
+    var movie: Movie!
+    var profilePaths: [CastMember]!
+    
+    // track index of array to grab
+    var endIndex = 0
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -58,6 +64,8 @@ class DetailsView: UIView {
         
     private func configure() {
         backgroundColor = UIColor.detailsRed
+        movie = DataManager.shared.selectedMovie
+        profilePaths = movie.cast
         setupBackdrop()
         setupButton()
         setupSynopsis()
@@ -138,8 +146,6 @@ extension DetailsView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let movie = DataManager.shared.selectedMovie else { return UITableViewCell() }
-        
         if indexPath.section == 0 {
             // director/ company cell
             let cell = tableView.dequeueReusableCell(withIdentifier: DirectorCell.identifier, for: indexPath) as! DirectorCell
@@ -149,26 +155,23 @@ extension DetailsView: UITableViewDelegate, UITableViewDataSource {
         } else {
             // cast cell
             let cell = tableView.dequeueReusableCell(withIdentifier: CastCell.identifier, for: indexPath) as! CastCell
-       
-            let profilePaths = movie.cast
             
-            if let count = profilePaths?.count, count >= 3 {
-                // MARK - set images
-                cell.castImageOne.downloadImage(imageType: ImageType.castImage, path: profilePaths?[indexPath.row].profilePath ?? "")
-                cell.castImageTwo.downloadImage(imageType: ImageType.castImage, path: profilePaths?[indexPath.row + 1].profilePath ?? "")
-                cell.castImageThree.downloadImage(imageType: ImageType.castImage, path: profilePaths?[indexPath.row + 2].profilePath ?? "")
-                
-                // MARK - set names
-                cell.castOneLabel.text = profilePaths?[indexPath.row].name
-                cell.castTwoLabel.text = profilePaths?[indexPath.row + 1].name
-                cell.castThreeLabel.text = profilePaths?[indexPath.row + 2].name
+            if let profiles = self.profilePaths {
+                let startIndex = indexPath.row * 3
+                let endIndex = min(profiles.count, startIndex + 3)
+                let castArray = Array(profiles[startIndex..<endIndex])
+
+    //            let castArray = Array(profilePaths?[startIndex...endIndex] ?? [])
+    //            print(castArray)
+                cell.setupCell(with: castArray)
             }
+            
             return cell
         }
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 80
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -179,7 +182,8 @@ extension DetailsView: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return 1
         } else {
-            return 1 // DataManager.shared.selectedMovie?.cast?.count ?? 0
+            let castCount = DataManager.shared.selectedMovie?.cast?.count ?? 0
+            return castCount / 3 + (castCount % 3 > 0 ? 1 : 0)
         }
     }
 }

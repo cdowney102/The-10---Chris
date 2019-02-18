@@ -51,6 +51,6 @@ extension DetailsController {
 
 extension DetailsController {
     private func pop() {
-        navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: false)
     }
 }

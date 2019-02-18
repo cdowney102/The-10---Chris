@@ -51,9 +51,8 @@ extension ScaleImageView {
 
 // MARK - to set appropriate star (color) for movie rating
 extension UIImageView {
-    
     static var cache: [URL: UIImage] = [:]
-
+    
     func setStarRating(with rating: Double) {
         var star = #imageLiteral(resourceName: "Home Yellow Star-1")
         if rating < 4 && rating != 0 {
@@ -72,10 +71,15 @@ extension UIImageView {
             return
         }
         
+        if let cached = UIImageView.cache[url] {
+            self.image = cached
+            return
+        }
         let task = URLSession.shared.dataTask(with: url) { [ weak self ] data, response, error in
             
             if let imageData = data, let img = UIImage(data: imageData) {
                 DispatchQueue.main.async {
+                    UIImageView.cache[url] = img
                     self?.image = img
                     return
                 }
