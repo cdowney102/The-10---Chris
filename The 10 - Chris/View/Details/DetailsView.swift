@@ -12,10 +12,7 @@ import UIKit
 class DetailsView: UIView {
     
     let synopsisView = SynopsisView(frame: .zero)
-    
-    //track cell index for array slicing for castcell
-    var slice = 0
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
    
@@ -128,18 +125,14 @@ extension DetailsView: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: CastCell.identifier, for: indexPath) as! CastCell
-//            slice += 3
-            print(indexPath.row)
-            print(movie.cast?.first)
+       
             let profilePaths = movie.cast
-            //cell.castImageOne.downloadImage(imageType: ImageType.castImage, path: profilePaths?.first?.profilePath ?? "")
-            cell.castImageOne.downloadImage(imageType: ImageType.castImage, path: profilePaths?[indexPath.row].profilePath ?? "")
-            cell.castImageTwo.downloadImage(imageType: ImageType.castImage, path: profilePaths?[indexPath.row].profilePath ?? "")
-            cell.castImageThree.downloadImage(imageType: ImageType.castImage, path: profilePaths?[indexPath.row].profilePath ?? "")
-            #warning("fix bang operator")
-//            if slice <= (DataManager.shared.selectedMovie?.cast?.count)! {
-////                cell.setCellData(for: movie, slice: slice)
-//            }
+            
+            if let count = profilePaths?.count, count >= 3 {
+                cell.castImageOne.downloadImage(imageType: ImageType.castImage, path: profilePaths?[indexPath.row].profilePath ?? "")
+                cell.castImageTwo.downloadImage(imageType: ImageType.castImage, path: profilePaths?[indexPath.row + 1].profilePath ?? "")
+                cell.castImageThree.downloadImage(imageType: ImageType.castImage, path: profilePaths?[indexPath.row + 2].profilePath ?? "")
+            }
             return cell
         }
     }
@@ -156,7 +149,7 @@ extension DetailsView: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return 1
         } else {
-            return DataManager.shared.selectedMovie?.cast?.count ?? 0
+            return 1 // DataManager.shared.selectedMovie?.cast?.count ?? 0
         }
     }
 }
