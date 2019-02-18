@@ -130,7 +130,12 @@ extension DetailsView: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: CastCell.identifier, for: indexPath) as! CastCell
 //            slice += 3
             print(indexPath.row)
-//            cell.castImageOne.downloadImage(imageType: ImageType.castImage, path: <#T##String#>)
+            print(movie.cast?.first)
+            let profilePaths = movie.cast
+            //cell.castImageOne.downloadImage(imageType: ImageType.castImage, path: profilePaths?.first?.profilePath ?? "")
+            cell.castImageOne.downloadImage(imageType: ImageType.castImage, path: profilePaths?[indexPath.row].profilePath ?? "")
+            cell.castImageTwo.downloadImage(imageType: ImageType.castImage, path: profilePaths?[indexPath.row].profilePath ?? "")
+            cell.castImageThree.downloadImage(imageType: ImageType.castImage, path: profilePaths?[indexPath.row].profilePath ?? "")
             #warning("fix bang operator")
 //            if slice <= (DataManager.shared.selectedMovie?.cast?.count)! {
 ////                cell.setCellData(for: movie, slice: slice)

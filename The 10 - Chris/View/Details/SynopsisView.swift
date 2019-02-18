@@ -102,7 +102,6 @@ class SynopsisView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = UIColor.detailsRed
         self.addShadow(cornerRadius: 10)
-        setupBackground()
         setupTitle()
         setupImdbStar()
         setupRatingAndDates()
