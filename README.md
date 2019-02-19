@@ -1,5 +1,5 @@
 # The-10---Chris
-An app that displays 10 now playing movies &amp; 10 upcoming movies
+An app that displays 10 now playing movies &amp; 10 upcoming movies in the US region. API: https://www.themoviedb.org/
 
 <b>SCREENSHOTS</b>:
 
