@@ -1,5 +1,5 @@
 # The-10---Chris
-An app that displays 10 now playing movies &amp; 10 upcoming movies in the US region. A take home project assigned by @seanallen_dev as part of a job interview for a San Francisco start-up. Judging based off code, UI/ UX design and "App Store Readiness" (user experience, UI across all device sizes, displaying alerts for errors, network connection tests, etc.). Project ranked first of all applicants. API: https://www.themoviedb.org/
+An app that displays 10 now playing movies &amp; 10 upcoming movies in the US region. A take home project assigned by @seanallen_dev as part of a job interview for a San Francisco start-up where he is lead iOS developer. This project ranked the highest of all applicants. Judging based off code, UI/ UX design and "App Store Readiness" (user experience, UI across all device sizes, displaying alerts for errors, network connection tests, etc.). API: https://www.themoviedb.org/
 
 <b>SCREENSHOTS</b>:
 
